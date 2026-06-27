@@ -251,6 +251,15 @@ table.cmp .swatch{width:10px;height:10px;border-radius:3px;flex-shrink:0}
 .nrow .nrdate{width:108px;flex-shrink:0;font-family:'Fraunces',serif;font-weight:600;font-size:15px;color:var(--ink-soft)}
 .nrbody{flex:1;display:flex;flex-direction:column;gap:6px}
 @media(max-width:600px){.nrow{flex-direction:column;gap:6px}.nrow .nrdate{width:auto}}
+/* essays that worked */
+.essaybox{margin-top:22px;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:var(--r-sm);background:var(--paper-2);padding:18px 20px}
+.essaybox h4{font-family:'Fraunces',serif;font-weight:600;font-size:16px;margin-bottom:6px}
+.essay-disz{font-size:12.5px;color:var(--muted);line-height:1.5;margin-bottom:14px;max-width:70ch}
+.esrc{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:10px}
+.esrc-item{display:flex;flex-direction:column;gap:3px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:11px 13px;transition:.15s}
+.esrc-item:hover{border-color:var(--ink);transform:translateY(-2px);box-shadow:var(--shadow)}
+.es-t{font-weight:600;font-size:13.5px;line-height:1.3}
+.es-m{font-size:11.5px;color:var(--muted);line-height:1.4}
 @media(max-width:620px){.hero{padding:42px 0 24px}.dhead-mono{font-size:150px}.wrap,.topbar-in,.dhead-in,.subnav-in{padding-left:18px;padding-right:18px}}
 </style>
 </head>
@@ -858,6 +867,70 @@ const NEWS={
  ]
 };
 
+/* ============ ESSAYS THAT WORKED (curated, verified sources; study not copy) ============ */
+const ESSAYS={
+ duke:[
+  {t:"How to write the Duke supplements — examples + guide",s:"College Essay Guy",u:"https://www.collegeessayguy.com/blog/duke-supplemental-essay",m:"2025–26 · full example essays for every Duke prompt, annotated"},
+  {t:"2 strong Duke essay examples",s:"CollegeVine",u:"https://blog.collegevine.com/duke-essay-examples",m:"2023 · real Pratt and 'Why Duke' essays with analysis"},
+  {t:"Duke supplemental essay database",s:"Clastify",u:"https://www.clastify.com/supplement/duke-university",m:"2023–25 · 30+ real admitted essays, by prompt"}
+ ],
+ nyu:[
+  {t:"NYU counselors tackle the supplement (official samples)",s:"NYU · meet.nyu.edu",u:"https://meet.nyu.edu/advice/application-tips/nyu-admissions-counselors-tackle-the-2023-24-supplemental-essay/",m:"2023–24 · NYU's own counselors model the prompt"},
+  {t:"3 strong NYU community essay examples",s:"CollegeVine",u:"https://blog.collegevine.com/nyu-diversity-essay-examples",m:"2023 · real student essays with critique"},
+  {t:"NYU essay examples (and why they worked)",s:"CollegeAdvisor",u:"https://www.collegeadvisor.com/essay-guides/nyu-essay-examples-and-why-they-worked/",m:"2021–22 · admitted essays with ex-admissions-officer notes"}
+ ],
+ uchicago:[
+  {t:"UChicago extended essays — guide + examples",s:"College Essay Guy",u:"https://www.collegeessayguy.com/blog/uchicago-extended-essay",m:"full examples for the famously quirky extended essays"},
+  {t:"2 great UChicago essay examples",s:"CollegeVine",u:"https://blog.collegevine.com/uchicago-essay-example",m:"2022 · real extended-essay responses, annotated"},
+  {t:"UChicago essay examples (and why they worked)",s:"CollegeAdvisor",u:"https://www.collegeadvisor.com/essay-guides/uchicago-essay-examples/",m:"2023–24 · admitted essays with ex-AO commentary"}
+ ],
+ northwestern:[
+  {t:"How to write the Northwestern supplement — examples + guide",s:"College Essay Guy",u:"https://www.collegeessayguy.com/blog/northwestern-supplemental-essay",m:"2025–26 · full examples for the current prompts"},
+  {t:"3 inspiring Northwestern essay examples",s:"CollegeVine",u:"https://blog.collegevine.com/northwestern-essay-examples",m:"2023 · real 'Why Northwestern' essays with critique"},
+  {t:"A Medill 'Why Northwestern' essay that worked",s:"Essays That Worked",u:"https://essaysthatworked.com/essay-library/112",m:"2022 · full admitted essay + why it worked"}
+ ],
+ unc:[
+  {t:"2 strong UNC Chapel Hill essay examples",s:"CollegeVine",u:"https://blog.collegevine.com/unc-chapel-hill-essay-examples",m:"2024 · real essays with annotated analysis"},
+  {t:"12 UNC Chapel Hill essays that worked",s:"Essays That Worked",u:"https://essaysthatworked.com/unc-chapel-hill",m:"2022–26 · admitted essays across UNC prompts"},
+  {t:"UNC 'academic interests' essay database",s:"Clastify",u:"https://www.clastify.com/supplement/unc-chapel-hill/academic-interests",m:"2024–25 · real student essays, by prompt"}
+ ],
+ ucla:[
+  {t:"20 UC Personal Insight Question examples",s:"College Essay Guy",u:"https://www.collegeessayguy.com/blog/uc-essay-examples-personal-insight-questions",m:"2026–27 · all 8 PIQs (shared across UCs), AO commentary"},
+  {t:"18 UCLA essays that worked",s:"Essays That Worked",u:"https://essaysthatworked.com/ucla-essay-examples",m:"2022–26 · UCLA-admitted PIQ essays, by prompt"},
+  {t:"12 UC essay examples",s:"CollegeVine",u:"https://blog.collegevine.com/university-of-california-essay-examples",m:"2023 · real PIQ essays with analysis"}
+ ],
+ usc:[
+  {t:"How to write the USC supplements — guide + examples",s:"College Essay Guy",u:"https://www.collegeessayguy.com/blog/university-southern-california-usc-supplemental-essays",m:"2025–26 · 'Why USC' + Viterbi/Dornsife examples"},
+  {t:"3 USC essay examples by accepted students",s:"CollegeVine",u:"https://blog.collegevine.com/usc-essay-examples",m:"2023 · real admitted essays with analysis"},
+  {t:"4 USC essays that worked",s:"Essays That Worked",u:"https://essaysthatworked.com/usc-supplemental-essays",m:"2021–23 · admitted essays for USC prompts"}
+ ],
+ utaustin:[
+  {t:"UT major supplement — 7 admitted-student examples",s:"Tex Admissions",u:"https://www.texadmissions.com/blog/2025/4/29/ut-austin-major-supplement-tips-and-essay-examples",m:"2025 · 'why your major' essays (McCombs/CS/Eng)"},
+  {t:"UT 'proud activity' supplement — 11 examples",s:"Tex Admissions",u:"https://www.texadmissions.com/blog/2025/5/29/ut-austin-proud-supplement-tips-essay-examples",m:"2025 · full samples for the proud-activity prompt"},
+  {t:"How to write the UT Austin supplements — examples + guide",s:"College Essay Guy",u:"https://www.collegeessayguy.com/blog/university-texas-austin-supplemental-essay",m:"2025–26 · all current UT prompts with worked examples"}
+ ],
+ uiuc:[
+  {t:"Major-specific short-answer examples (official)",s:"UIUC Admissions blog",u:"https://blog.admissions.illinois.edu/apply-like-a-pro-examples-of-short-answer-college-application-questions/",m:"official · sample 150-word major essays from UIUC"},
+  {t:"How to write the UIUC supplements — examples + guide",s:"College Essay Guy",u:"https://www.collegeessayguy.com/blog/university-illinois-urbana-champaign-supplemental-essays",m:"2025–26 · full major-specific example, annotated"},
+  {t:"UIUC essay example + breakdown",s:"CollegeVine",u:"https://blog.collegevine.com/uiuc-essay-example",m:"real admitted essay, paragraph-by-paragraph analysis"}
+ ],
+ indiana:[
+  {t:"An IU Kelley supplemental essay that worked",s:"Essays That Worked",u:"https://essaysthatworked.com/essay-library/47-walking-into-school-on-the-first-day-of",m:"full admitted 'academic & career plans' essay"},
+  {t:"How to write the Indiana University essay",s:"CollegeVine",u:"https://blog.collegevine.com/how-to-write-the-indiana-university-bloomington-essays",m:"2024–25 · guidance + illustrative excerpts for IU's prompt"},
+  {t:"A real admitted Kelley essay, annotated",s:"Veridian Prep",u:"https://www.veridianprep.com/blog/real-college-essays-that-worked-indiana",m:"full personal statement with why-it-worked notes"}
+ ],
+ berkeley:[
+  {t:"20 UC Personal Insight Question examples",s:"College Essay Guy",u:"https://www.collegeessayguy.com/blog/uc-essay-examples-personal-insight-questions",m:"2026–27 · all 8 PIQs (shared across UCs), AO commentary"},
+  {t:"18 UC Berkeley essays that worked",s:"Essays That Worked",u:"https://essaysthatworked.com/uc-berkeley-essay-examples",m:"2021–26 · Berkeley-admitted PIQ essays, by prompt"},
+  {t:"12 UC essay examples",s:"CollegeVine",u:"https://blog.collegevine.com/university-of-california-essay-examples",m:"2023 · real PIQ essays with analysis"}
+ ],
+ umich:[
+  {t:"7 University of Michigan essay examples",s:"CollegeVine",u:"https://blog.collegevine.com/university-of-michigan-essay-examples",m:"2024 · community + 'Why Michigan' essays (incl. Ross)"},
+  {t:"26 University of Michigan supplemental essay examples",s:"Essays That Worked",u:"https://essaysthatworked.com/university-of-michigan",m:"2022–26 · admitted essays across both UMich prompts"},
+  {t:"UMich essay examples (and why they worked)",s:"CollegeAdvisor",u:"https://www.collegeadvisor.com/essay-guides/university-of-michigan-essay-examples-and-why-they-worked/",m:"admitted 'Why Michigan' essays with ex-AO commentary"}
+ ]
+};
+
 /* ============ HELPERS ============ */
 const $=(s,e=document)=>e.querySelector(s);
 function verdictColor(f){if(f>=90)return["#1d6b46","#dff0e6"];if(f>=85)return["#2E7D55","#e1f0e7"];if(f>=80)return["#8a6d1f","#f3e8c9"];if(f>=75)return["#9c6322","#f7e8d6"];return["#8a5a2a","#f1e4d3"];}
@@ -976,6 +1049,7 @@ function renderDetail(s){
  const dims=[["Program depth","program"],["Experiential & funding","experiential"],["Outcomes & network","outcomes"],["Ecosystem / location","location"]];
  const sup=s.supplements||[];
  const news=NEWS[s.id]||[];
+ const essays=ESSAYS[s.id]||[];
  $("#detail").innerHTML=`
  <header class="dhead" style="--ac:${s.ac};--ac2:${s.ac2}">
   <div class="dhead-bg"></div><div class="dhead-mono serif">${s.mono}</div>
@@ -1030,6 +1104,7 @@ function renderDetail(s){
    <div class="essay-note"><span class="ic">✎</span><div>${s.appNote}</div></div>
    ${s.optIntro?`<p class="opt-intro">${s.optIntro}</p>`:""}
    ${sup.map(q=>`<details class="acc"><summary><div class="qmeta"><div class="qt">${q.title}</div><div class="qsub"><span class="req ${q.req==='Required'?'r':'o'}">${q.req}</span>${q.words}${cyctag(q.cycle)}</div></div><span class="exp">+</span></summary><div class="acc-body"><div class="ptext">${q.text}</div></div></details>`).join("")}
+   ${essays.length?`<div class="essaybox"><h4>Essays that worked — where to study real examples</h4><p class="essay-disz">Study these for structure, specificity and voice — never copy. Admissions readers (and AI detectors) recognize recycled essays. Prompts change year to year, and these are third-party sources, so verify before relying.</p><div class="esrc">${essays.map(e=>`<a class="esrc-item" href="${e.u}" target="_blank" rel="noopener noreferrer"><span class="es-t">${e.t}</span><span class="es-m">${e.s} · ${e.m}</span></a>`).join("")}</div></div>`:``}
   </section>
 
   <section class="sec" id="sec-cost"><div class="sec-h"><span class="n serif">06</span><h2 class="serif">Cost &amp; aid</h2></div>
