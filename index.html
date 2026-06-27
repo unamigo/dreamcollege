@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founder's Compass — Undergraduate Entrepreneurship Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16181D; --ink-soft:#33373F; --paper:#FBFAF6; --paper-2:#F4F1E9; --card:#FFFFFF;
+  --line:#E6E1D5; --line-2:#EFEBE1; --muted:#6E6A5F; --muted-2:#908B7E;
+  --gold:#B5832B; --gold-soft:#F2E7CE; --green:#2E7D55; --green-soft:#E1F0E7;
+  --amber:#B4631E; --amber-soft:#F7E8D6; --red:#9E3324;
+  --accent:#16181D; --accent2:#33373F;
+  --shadow:0 1px 2px rgba(20,20,18,.04),0 8px 28px rgba(20,20,18,.06);
+  --shadow-lg:0 2px 6px rgba(20,20,18,.06),0 24px 60px rgba(20,20,18,.12);
+  --r:16px; --r-sm:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;font-size:16px}
+.serif{font-family:'Fraunces',serif}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+
+/* ---------- TOP BAR ---------- */
+.topbar{position:sticky;top:0;z-index:60;background:rgba(251,250,246,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+.topbar-in{max-width:1200px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;gap:11px;cursor:pointer;flex-shrink:0}
+.brand .mark{width:30px;height:30px;border-radius:8px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;font-size:18px;flex-shrink:0}
+.brand .mark span{transform:translateY(-1px)}
+.brand-txt{display:flex;flex-direction:column;line-height:1.05}
+.brand-txt b{font-family:'Fraunces',serif;font-weight:600;font-size:16px;letter-spacing:.1px}
+.brand-txt small{font-size:10.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.topbar-spacer{flex:1}
+.fresh{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);background:var(--paper-2);border:1px solid var(--line);padding:6px 11px;border-radius:999px;white-space:nowrap}
+.fresh .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px var(--green-soft);animation:pulse 2.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.tb-btn{font-size:13px;font-weight:600;color:var(--ink-soft);padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);cursor:pointer;white-space:nowrap;transition:.15s}
+.tb-btn:hover{border-color:var(--ink);color:var(--ink)}
+.tb-back{display:none;align-items:center;gap:7px}
+body.detail .tb-back{display:inline-flex}
+body.detail .tb-home-only{display:none}
+
+/* ---------- WRAP ---------- */
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+.view{display:none;animation:fade .4s ease}
+.view.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- HERO ---------- */
+.hero{padding:64px 0 30px;border-bottom:1px solid var(--line)}
+.hero .eyebrow{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:18px}
+.hero h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(36px,5.4vw,62px);line-height:1.02;letter-spacing:-.5px;max-width:16ch}
+.hero h1 em{font-style:italic;color:var(--ink-soft)}
+.hero .lede{font-size:18px;color:var(--ink-soft);max-width:60ch;margin-top:22px}
+.hero .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.pill{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);padding:8px 14px;border-radius:999px}
+.pill .ic{color:var(--gold)}
+
+/* ---------- CONTROLS ---------- */
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:24px 0 8px;position:sticky;top:61px;background:linear-gradient(var(--paper) 78%,rgba(251,250,246,0));z-index:30}
+.ctrl-group{display:flex;align-items:center;gap:8px}
+.ctrl-label{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.seg{display:inline-flex;background:var(--paper-2);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{font-family:inherit;font-size:12.5px;font-weight:600;color:var(--muted);background:none;border:none;padding:6px 13px;border-radius:999px;cursor:pointer;transition:.15s;white-space:nowrap}
+.seg button.on{background:var(--ink);color:var(--paper)}
+.controls .spacer{flex:1}
+.count{font-size:13px;color:var(--muted);font-weight:500}
+
+/* ---------- CARD GRID ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;padding:24px 0 10px}
+.scard{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:0;overflow:hidden;cursor:pointer;transition:.22s cubic-bezier(.2,.7,.3,1);display:flex;flex-direction:column}
+.scard:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--line-2)}
+.scard .topbar-accent{height:5px;background:var(--ac)}
+.scard-body{padding:22px 22px 20px}
+.scard-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.scard h3{font-family:'Fraunces',serif;font-weight:600;font-size:23px;line-height:1.08;letter-spacing:-.2px}
+.scard .loc{font-size:13px;color:var(--muted);margin-top:5px;display:flex;align-items:center;gap:6px}
+.ring{flex-shrink:0}
+.verdict-chip{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.02em;padding:5px 10px;border-radius:999px;margin-top:14px}
+.scard .ent{font-size:13.5px;color:var(--ink-soft);margin-top:14px;line-height:1.5;border-top:1px solid var(--line-2);padding-top:14px;min-height:54px}
+.scard .ent b{color:var(--ink);font-weight:600}
+.scard-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid var(--line-2);padding:14px 22px;background:var(--paper)}
+.kv{display:flex;flex-direction:column;gap:2px}
+.kv .k{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);font-weight:700}
+.kv .v{font-size:13.5px;font-weight:600;color:var(--ink)}
+.kv .v.amberv{color:var(--amber)}
+.badge-sel{font-size:11px;font-weight:700;padding:4px 9px;border-radius:6px;background:var(--paper-2);border:1px solid var(--line);color:var(--ink-soft);white-space:nowrap}
+
+/* ---------- TABLE ---------- */
+.tablewrap{padding:18px 0;overflow-x:auto}
+table.cmp{width:100%;border-collapse:collapse;font-size:14px;min-width:760px}
+table.cmp th,table.cmp td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line-2)}
+table.cmp th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;cursor:pointer;user-select:none;white-space:nowrap}
+table.cmp th:hover{color:var(--ink)}
+table.cmp tbody tr{cursor:pointer;transition:.12s}
+table.cmp tbody tr:hover{background:var(--paper-2)}
+table.cmp .sname{font-family:'Fraunces',serif;font-weight:600;font-size:16px;display:flex;align-items:center;gap:10px}
+table.cmp .swatch{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.fitnum{font-weight:700;font-variant-numeric:tabular-nums}
+
+/* ---------- rolling out ---------- */
+.rollout{margin:30px 0 70px;padding:24px 26px;border:1px dashed var(--line);border-radius:var(--r);background:var(--paper-2)}
+.rollout h4{font-family:'Fraunces',serif;font-weight:600;font-size:17px;margin-bottom:5px}
+.rollout p{font-size:13.5px;color:var(--muted);margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:9px}
+.chip-soon{font-size:13px;font-weight:600;color:var(--muted-2);background:var(--card);border:1px solid var(--line);padding:7px 13px;border-radius:999px;opacity:.8}
+.chip-soon::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--muted-2);margin-right:8px;vertical-align:middle}
+
+/* ---------- methodology ---------- */
+.method{margin:14px 0 40px;border:1px solid var(--line);border-radius:var(--r);background:var(--card);overflow:hidden}
+.method summary{list-style:none;cursor:pointer;padding:18px 24px;display:flex;align-items:center;gap:12px;font-weight:600;font-size:15px}
+.method summary::-webkit-details-marker{display:none}
+.method summary .plus{margin-left:auto;font-size:20px;color:var(--muted);transition:.2s}
+.method[open] summary .plus{transform:rotate(45deg)}
+.method-body{padding:0 24px 24px;border-top:1px solid var(--line-2);font-size:14px;color:var(--ink-soft)}
+.method-body h5{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:18px 0 10px}
+.wbar{display:flex;align-items:center;gap:12px;margin:9px 0}
+.wbar .wlab{width:230px;font-weight:600;font-size:13.5px}
+.wbar .wtrack{flex:1;height:8px;background:var(--paper-2);border-radius:999px;overflow:hidden}
+.wbar .wfill{height:100%;background:var(--gold);border-radius:999px}
+.wbar .wpct{width:42px;text-align:right;font-weight:700;font-size:13px;font-variant-numeric:tabular-nums}
+.tag-legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px}
+.tag-legend span{display:inline-flex;align-items:center;gap:7px;font-size:13px}
+
+/* ---------- DETAIL ---------- */
+.dhead{position:relative;color:#fff;border-radius:0;overflow:hidden}
+.dhead-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--ac) 0%,var(--ac2) 100%)}
+.dhead-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 85% -10%,rgba(255,255,255,.18),transparent 55%)}
+.dhead-mono{position:absolute;right:-10px;bottom:-44px;font-family:'Fraunces',serif;font-weight:600;font-size:230px;line-height:1;color:rgba(255,255,255,.09);pointer-events:none;user-select:none}
+.dhead-in{position:relative;max-width:1200px;margin:0 auto;padding:46px 28px 40px;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.dhead .kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;opacity:.8;margin-bottom:12px}
+.dhead h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(34px,5vw,56px);line-height:1.0;letter-spacing:-.5px}
+.dhead .dmeta{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:18px;font-size:14px;font-weight:500;opacity:.94}
+.dhead .dmeta span{display:inline-flex;align-items:center;gap:7px}
+.dhead-fit{display:flex;flex-direction:column;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:var(--r);padding:18px 22px;backdrop-filter:blur(6px)}
+.dhead-fit .vlabel{font-family:'Fraunces',serif;font-weight:600;font-size:16px}
+.dhead-fit .vsub{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+
+/* sub nav */
+.subnav{position:sticky;top:61px;z-index:40;background:rgba(251,250,246,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.subnav-in{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;gap:4px;overflow-x:auto}
+.subnav a{font-size:13.5px;font-weight:600;color:var(--muted);padding:15px 14px;border-bottom:2px solid transparent;white-space:nowrap;transition:.15s}
+.subnav a:hover{color:var(--ink)}
+.subnav a.on{color:var(--ink);border-bottom-color:var(--ac)}
+
+.sec{padding:46px 0;border-bottom:1px solid var(--line-2);scroll-margin-top:120px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+.sec-h .n{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--gold);font-weight:500}
+.sec-h h2{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.3px}
+.sec .intro{font-size:16.5px;color:var(--ink-soft);max-width:74ch;margin-bottom:26px}
+.sec .intro.big{font-size:19px;line-height:1.5;color:var(--ink)}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}
+.block{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px}
+.block h4{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:14px}
+.ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.ul li{font-size:14.5px;color:var(--ink-soft);padding-left:24px;position:relative;line-height:1.5}
+.ul li::before{content:"";position:absolute;left:2px;top:9px;width:7px;height:7px;border-radius:2px;background:var(--ac)}
+.ul.tick li::before{content:"✓";background:none;color:var(--green);font-weight:800;top:0;left:0;font-size:14px}
+.ul.warn li::before{content:"!";background:none;color:var(--amber);font-weight:800;top:-1px;left:3px;font-size:15px}
+
+/* entrepreneurship */
+.ent-banner{background:linear-gradient(135deg,var(--ac) 0%,var(--ac2) 130%);color:#fff;border-radius:var(--r);padding:28px 30px;margin-bottom:24px;position:relative;overflow:hidden}
+.ent-banner .rank{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);padding:6px 12px;border-radius:999px;margin-bottom:14px}
+.ent-banner p{font-size:19px;line-height:1.45;font-family:'Fraunces',serif;font-weight:500;max-width:70ch}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:6px}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);padding:18px 20px;transition:.18s}
+.pcard:hover{box-shadow:var(--shadow);border-color:var(--line-2)}
+.pcard .pt{font-weight:700;font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.pcard .pt .d{width:8px;height:8px;border-radius:50%;background:var(--ac);flex-shrink:0}
+.pcard .pd{font-size:13.5px;color:var(--muted);line-height:1.5}
+.subhead{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:28px 0 14px}
+
+/* stat tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:26px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);padding:18px 20px}
+.tile .tl{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.tile .tv{font-family:'Fraunces',serif;font-weight:600;font-size:27px;margin-top:7px;letter-spacing:-.3px}
+.tile .tn{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* timeline */
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:6px}
+.tlrow{display:flex;gap:18px;padding:16px 0;border-bottom:1px solid var(--line-2);align-items:center}
+.tlrow:last-child{border-bottom:none}
+.tldate{width:120px;flex-shrink:0;font-family:'Fraunces',serif;font-weight:600;font-size:20px}
+.tlmid{flex:1}
+.tlmid .tp{font-weight:600;font-size:15px}
+.tlmid .tnote{font-size:13px;color:var(--muted);margin-top:2px}
+.cyc{font-size:10.5px;font-weight:700;letter-spacing:.03em;padding:4px 9px;border-radius:6px;white-space:nowrap}
+.cyc.ok{background:var(--green-soft);color:var(--green)}
+.cyc.prior{background:var(--amber-soft);color:var(--amber)}
+
+/* essays / accordion */
+.essay-note{font-size:14.5px;color:var(--ink-soft);background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px 18px;margin-bottom:18px;display:flex;gap:10px;align-items:flex-start}
+.essay-note .ic{color:var(--gold);font-weight:800}
+.acc{border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;margin-bottom:12px;background:var(--card)}
+.acc summary{list-style:none;cursor:pointer;padding:16px 20px;display:flex;align-items:center;gap:14px}
+.acc summary::-webkit-details-marker{display:none}
+.acc .qmeta{flex:1}
+.acc .qt{font-weight:600;font-size:15px;line-height:1.35}
+.acc .qsub{font-size:12.5px;color:var(--muted);margin-top:4px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.req{font-size:10.5px;font-weight:700;letter-spacing:.03em;padding:3px 8px;border-radius:5px;text-transform:uppercase}
+.req.r{background:#F3E3E0;color:var(--red)}
+.req.o{background:var(--paper-2);color:var(--muted)}
+.acc .exp{font-size:22px;color:var(--muted);transition:.2s;flex-shrink:0}
+.acc[open] .exp{transform:rotate(45deg)}
+.acc-body{padding:4px 20px 20px;border-top:1px solid var(--line-2)}
+.acc-body .ptext{font-size:15px;line-height:1.6;color:var(--ink);font-family:'Fraunces',serif;font-weight:400;padding-top:14px}
+.opt-intro{font-size:13.5px;color:var(--muted);font-style:italic;margin:6px 0 12px}
+
+/* fit */
+.fit-wrap{display:grid;grid-template-columns:280px 1fr;gap:30px;align-items:start}
+@media(max-width:760px){.fit-wrap{grid-template-columns:1fr}}
+.fit-score-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px;text-align:center}
+.fit-score-card .bigv{font-family:'Fraunces',serif;font-weight:700;font-size:30px;margin-top:14px}
+.fit-score-card .bigsub{font-size:13px;color:var(--muted);margin-top:4px}
+.bars{display:flex;flex-direction:column;gap:18px}
+.bar .blab{display:flex;justify-content:space-between;font-size:14px;font-weight:600;margin-bottom:7px}
+.bar .blab .bn{color:var(--muted-2);font-variant-numeric:tabular-nums;font-weight:700}
+.bar .btrack{height:10px;background:var(--paper-2);border-radius:999px;overflow:hidden}
+.bar .bfill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width .9s cubic-bezier(.2,.7,.3,1)}
+.callout{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.callout{grid-template-columns:1fr}}
+
+/* footer */
+.dfoot{padding:36px 0 80px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.dfoot .src{font-size:12.5px;color:var(--muted);max-width:60ch;line-height:1.5}
+.navswitch{display:flex;gap:10px}
+.navswitch button{font-family:inherit;font-size:13.5px;font-weight:600;border:1px solid var(--line);background:var(--card);padding:10px 16px;border-radius:999px;cursor:pointer;transition:.15s}
+.navswitch button:hover{border-color:var(--ink)}
+.sitefoot{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-size:12.5px;color:var(--muted-2)}
+/* news */
+.newsfeed{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;padding:4px 0 8px}
+.ncard{display:flex;flex-direction:column;gap:9px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--ac,#999);border-radius:var(--r-sm);padding:16px 18px;transition:.18s}
+.ncard:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.nctop{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--ink-soft)}
+.nswatch{width:9px;height:9px;border-radius:3px;flex-shrink:0}
+.ndate{margin-left:auto;color:var(--muted-2);font-weight:600;font-size:11.5px}
+.ntitle{font-family:'Fraunces',serif;font-weight:600;font-size:16px;line-height:1.25}
+.nblurb{font-size:13px;color:var(--muted);line-height:1.5;flex:1}
+.nsrc{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--gold)}
+.newslist{display:flex;flex-direction:column}
+.nrow{display:flex;gap:20px;padding:18px 2px;border-bottom:1px solid var(--line-2);align-items:flex-start;transition:.15s}
+.nrow:last-child{border-bottom:none}
+.nrow:hover{background:var(--paper-2)}
+.nrow .nrdate{width:108px;flex-shrink:0;font-family:'Fraunces',serif;font-weight:600;font-size:15px;color:var(--ink-soft)}
+.nrbody{flex:1;display:flex;flex-direction:column;gap:6px}
+@media(max-width:600px){.nrow{flex-direction:column;gap:6px}.nrow .nrdate{width:auto}}
+@media(max-width:620px){.hero{padding:42px 0 24px}.dhead-mono{font-size:150px}.wrap,.topbar-in,.dhead-in,.subnav-in{padding-left:18px;padding-right:18px}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand" onclick="go('')"><div class="mark"><span>F</span></div>
+      <div class="brand-txt"><b>Founder's Compass</b><small>Entrepreneurship Atlas</small></div>
+    </div>
+    <button class="tb-btn tb-back" onclick="go('')">← All schools</button>
+    <div class="topbar-spacer"></div>
+    <div class="fresh tb-home-only"><span class="dot"></span> News daily · data weekly · 26 Jun</div>
+    <button class="tb-btn tb-home-only" onclick="document.getElementById('method').open=true;document.getElementById('method').scrollIntoView({behavior:'smooth'})">Methodology</button>
+  </div>
+</div>
+
+<div id="hub" class="view"></div>
+<div id="detail" class="view"></div>
+
+<div class="sitefoot">Founder's Compass · An advisory tool for prospective undergraduates · Fit scores are entrepreneurship-weighted judgments, not admissions predictions.</div>
+
+<script>
+/* ============ DATA ============ */
+const META={updated:"27 June 2026",newsUpdated:"27 June 2026",cycle:"Fall 2027 entry"};
+const SCHOOLS=[
+{
+ id:"duke",name:"Duke University",short:"Duke",mono:"D",
+ city:"Durham",state:"NC",type:"Private",setting:"Midsize city · Research Triangle",undergrad:"≈6,640",platform:"Common App",
+ ac:"#0A2C7C",ac2:"#001A57",
+ fit:80,verdict:"Strong fit",sub:{program:7,experiential:7,outcomes:7,location:6},
+ rateNum:5.2,dlSort:1102,
+ selectivity:{rate:"5.2%",tier:"Most selective",note:"Class of 2028. Early Decision meaningfully lifts odds.",cycle:"prior"},
+ testPolicy:"Test-optional",sat:"1500–1570",act:"34–36",fee:"$85",recs:"2 teacher + 1 counselor",opens:"Early August",
+ deadlines:[
+  {plan:"Early Decision (binding)",date:"Nov 2",note:"Decisions mid-December",cycle:"ok"},
+  {plan:"Regular Decision",date:"Jan 4",note:"Decisions late March / early April",cycle:"ok"}
+ ],
+ bestFor:"Interdisciplinary high-achievers who want an elite brand plus the I&E Certificate layered onto engineering, CS, economics or public policy — within reach of the Research Triangle's startup scene.",
+ watch:["No standalone undergraduate entrepreneurship major — it's a certificate + co-curricular layer.","Absent from the Princeton Review Top 50 for undergrad entrepreneurship (2026), despite strong resources.","Ultra-selective; entrepreneurial drive must show up inside a broader excellent application."],
+ strengths:["Top-10 national university with elite engineering (Pratt), public policy (Sanford) and computer science.","Famously tight, loyal alumni network and a strong campus culture.","Anchored in the Research Triangle (RTP, Durham) — a fast-growing tech and biotech hub.","Deep cross-disciplinary culture: easy to combine technical, design and business coursework."],
+ entreHeadline:"Entrepreneurship at Duke is a cross-campus layer, not a department: you bolt the Innovation & Entrepreneurship (I&E) Certificate onto any major and tap a growing Durham innovation district.",
+ entreRank:"Not ranked in Princeton Review Top 50 (2026) — a genuine gap vs. peers",
+ programs:[
+  {t:"Duke I&E",d:"University-wide Innovation & Entrepreneurship initiative coordinating courses, mentors and events across every school."},
+  {t:"I&E Certificate",d:"The flagship undergraduate credential — open to all majors; combines core entrepreneurship courses with an experiential 'gateway' and capstone."},
+  {t:"The Bullpen / Duke in Durham",d:"Downtown innovation-district presence connecting students to Durham's startup community and co-working."},
+  {t:"Melissa & Doug Entrepreneurs",d:"Signature program backing student founders with funding, coaching and community."}
+ ],
+ funding:[
+  {t:"Duke Startup Challenge",d:"Long-running campus venture competition with cash prizes across tracks."},
+  {t:"Duke Capital Partners",d:"Invests in Duke-affiliated startups — a real capital pipeline for alumni/student ventures."},
+  {t:"I&E grants & fellowships",d:"Summer funding and fellowships for students building ventures or pursuing startup internships."}
+ ],
+ degrees:"I&E Certificate (no standalone major) · pairs naturally with Pratt Engineering, Computer Science, Economics or Public Policy",
+ founders:"Entrepreneurship is delivered co-curricularly rather than as a flagship major, but Duke's alumni founder network across tech, biotech and finance is deep and well-capitalized.",
+ cardEnt:"<b>I&E Certificate</b> layered on any major · Duke Capital Partners · Research Triangle access.",
+ appNote:"Duke uses the <b>Common App</b>: the personal statement (250–650 words) plus one required Duke essay and up to two optional prompts below.",
+ optIntro:"One required essay, then up to two of four optional prompts (250 words each).",
+ supplements:[
+  {title:"Why Duke? (required)",req:"Required",words:"250 words",cycle:"prior",text:"What is your impression of Duke as a university and community, and why do you believe it is a good match for your goals, values, and interests? If there is something specific that attracts you to our academic offerings in Trinity College of Arts and Sciences or the Pratt School of Engineering, or to our co-curricular opportunities, feel free to include that too."},
+  {title:"Viewpoints & experiences (optional)",req:"Optional",words:"250 words",cycle:"prior",text:"We believe a wide range of viewpoints and experiences is essential to maintaining Duke's vibrant living and learning community. Please share anything in this context that might help us better understand you and your potential contributions to Duke."},
+  {title:"Respectful disagreement (optional)",req:"Optional",words:"250 words",cycle:"prior",text:"Meaningful dialogue often involves respectful disagreement. Provide an example of a difference of opinion you've had with someone you care about. What did you learn from it?"},
+  {title:"Last thing you were excited about (optional)",req:"Optional",words:"250 words",cycle:"prior",text:"What's the last thing that you've been really excited about?"},
+  {title:"AI — when you would or wouldn't use it (optional)",req:"Optional",words:"250 words",cycle:"prior",text:"Duke recently launched an initiative “to bring together Duke experts across all disciplines who are advancing AI research, addressing the most pressing ethical challenges posed by AI, and shaping the future of AI in the classroom.” Tell us about a situation when you would or would not choose to use AI (when possible and permitted). What shapes your thinking?"}
+ ],
+ outcomes:["Strong placement into consulting, finance, tech and biotech; rising startup activity.","Duke Capital Partners gives student/alumni ventures a direct line to capital.","Highly active, geographically dispersed alumni network."],
+ cost:{mode:"private",sticker:"≈$98,500 / yr",aid:"Meets 100% of demonstrated need; no-loan for many families. Limited merit (A.B. Duke, Robertson)."},
+ src:"Sourced from admissions.duke.edu (2026-27 deadlines confirmed), Duke Factbook 2025-26 (rate, scores), financialaid.duke.edu, and entrepreneurship.duke.edu. Supplemental prompts reflect the 2025-26 set pending the 2026-27 release."
+},
+{
+ id:"nyu",name:"New York University",short:"NYU",mono:"N",
+ city:"New York",state:"NY",type:"Private",setting:"Urban · Greenwich Village",undergrad:"≈29,000",platform:"Common App",
+ ac:"#57068C",ac2:"#330662",
+ fit:87,verdict:"Excellent fit",sub:{program:8,experiential:7,outcomes:8,location:10},
+ rateNum:8,dlSort:1101,
+ selectivity:{rate:"≈8%",tier:"Most selective",note:"Overall rate is approximate (most recent cycle); Stern admits at a far lower rate. You apply to a specific NYU school/college, not NYU at large.",cycle:"prior"},
+ testPolicy:"Test-optional",sat:"≈1480–1570",act:"≈33–35",fee:"$85",recs:"1 counselor + 1 teacher",opens:"August 1",
+ deadlines:[
+  {plan:"Early Decision I (binding)",date:"Nov 1",note:"Decisions Dec 15",cycle:"ok"},
+  {plan:"Early Decision II (binding)",date:"Jan 1",note:"Decisions Feb 15",cycle:"ok"},
+  {plan:"Regular Decision",date:"Jan 5",note:"Decisions Apr 1",cycle:"ok"}
+ ],
+ bestFor:"Founders who want to build in New York — plugging into Stern, the Leslie eLab and the NYU Entrepreneurial Institute alongside one of the densest startup, finance and media ecosystems on earth. Especially strong for fintech, consumer, media-tech and hardware (via Tandon).",
+ watch:["High sticker price and historically uneven need-based aid — model your real net cost early.","Selectivity varies sharply by school: Stern is single-digit and far tougher than NYU overall.","No traditional campus — the city is the campus, which suits some students and not others."],
+ strengths:["A global brand with top programs in business (Stern), the arts (Tisch) and a fast-rising engineering school (Tandon).","Greenwich Village location wires students straight into NYC venture capital, startups and industry.","Apply-by-school structure lets you target a focused community (Stern, Tandon, CAS, Gallatin).","Strong international footprint — NYU Abu Dhabi, Shanghai and global academic centers."],
+ entreHeadline:"NYU's edge is New York itself: the NYU Entrepreneurial Institute, Stern's Berkley Center and the Leslie eLab put you inside one of the world's deepest pools of startups, capital and talent.",
+ entreRank:"Frequently cited among top entrepreneurship programs; exact 2026 national rank not confirmed",
+ programs:[
+  {t:"NYU Entrepreneurial Institute",d:"University-wide startup engine — mentorship, the Summer Launchpad accelerator and the flagship Entrepreneurs Challenge."},
+  {t:"Berkley Center (Stern)",d:"Stern's hub for entrepreneurship & innovation; undergraduate entrepreneurship coursework and a concentration."},
+  {t:"Leslie eLab",d:"Student incubator and maker / co-working space in the Village — open across schools."},
+  {t:"Tandon Future Labs",d:"Brooklyn-based startup incubators and hardware / engineering venture support."}
+ ],
+ funding:[
+  {t:"NYU Entrepreneurs Challenge",d:"University-wide competition with $200K+ in prizes across technology, social-venture and new-venture tracks."},
+  {t:"Summer Launchpad",d:"Cohort accelerator with stipends and a lean-startup curriculum, ending in an investor demo day."},
+  {t:"eLab programming",d:"Year-round prototyping resources, founder workshops and mentor office hours."}
+ ],
+ degrees:"Stern entrepreneurship concentration & Business and Political Economy; university-wide coursework; Tandon and Tisch/Gallatin interdisciplinary venture paths — no single 'entrepreneurship major.'",
+ founders:"An enormous NYC alumni base across fintech, media and consumer tech; the city itself acts as an extended network of investors, operators and internships.",
+ appNote:"NYU uses the <b>Common App</b>: the personal statement (250–650 words) plus one optional NYU supplement. You apply to a specific NYU school/college; there is <b>no separate Stern essay</b>.",
+ optIntro:"",
+ supplements:[
+  {title:"The ‘bridge builder’ essay (optional)",req:"Optional",words:"≤250 words · answer one or more parts",cycle:"prior",text:"We are looking for students who want to be bridge builders—students who can connect people, groups, and ideas to span divides, foster understanding, and promote collaboration within a dynamic, interconnected, and vibrant global academic community. We are eager for you to tell us how your experiences have helped you understand what qualities and efforts are needed to bridge divides so that people can better learn and work together. Consider one or more of: (1) a time you encountered a perspective different from your own — what did you learn? (2) an experience working with others of different backgrounds — what challenges did the group face and what role did you play? (3) someone you've observed who is especially good at helping people think or work together — how do they do it?"}
+ ],
+ cost:{mode:"private",sticker:"≈$93,000–$95,000 / yr",aid:"Aid has expanded recently (need-based commitments plus AccessNYU scholarships), but NYU is historically less generous than peer privates — run the net-price calculator and apply early for scholarships."},
+ cardEnt:"NYC ecosystem · <b>Entrepreneurial Institute</b> + Stern Berkley Center + Leslie eLab.",
+ src:"Sourced from nyu.edu admissions (deadlines live for the upcoming cycle), the NYU Entrepreneurial Institute, Stern Berkley Center and Leslie eLab pages. Overall acceptance rate and score bands are approximate from the most recent cycle; the supplemental prompt reflects the 2025-26 ‘bridge builder’ set."
+},
+{
+ id:"uchicago",name:"University of Chicago",short:"UChicago",mono:"U",
+ city:"Chicago",state:"IL",type:"Private",setting:"Urban · Hyde Park",undergrad:"≈7,560",platform:"Common App / Coalition",
+ ac:"#7A0019",ac2:"#530011",
+ fit:85,verdict:"Excellent fit",sub:{program:8,experiential:8,outcomes:8,location:7},
+ rateNum:4.5,dlSort:1103,
+ selectivity:{rate:"4.5%",tier:"Most selective",note:"CDS 2024-25 (43,612 applicants, 1,955 admitted). Genuinely test-optional — only ~49% of enrolled students submitted scores.",cycle:"prior"},
+ testPolicy:"Test-optional",sat:"1510–1560",act:"34–35",fee:"$75",recs:"1 counselor + 2 teachers",opens:"August 1",
+ deadlines:[
+  {plan:"Early Action (non-binding)",date:"Nov 3",note:"Decisions mid-December",cycle:"prior"},
+  {plan:"Early Decision I (binding)",date:"Nov 3",note:"Decisions mid-December",cycle:"prior"},
+  {plan:"Early Decision II (binding)",date:"Jan 5",note:"Decisions mid-February",cycle:"prior"},
+  {plan:"Regular Decision",date:"Jan 5",note:"Decisions late March",cycle:"prior"}
+ ],
+ bestFor:"Analytically-minded founders — fintech, data, deep tech, econ-driven ventures — who want a real equity-investing accelerator (the New Venture Challenge) and a rare Booth-taught entrepreneurship minor on top of the most rigorous quantitative core in the country.",
+ watch:["Intense, theory-forward academic culture; the workload can crowd out building time.","The famously creative supplemental essays demand serious effort.","Strengths skew analytical/financial — less of a scrappy 'maker' vibe than some peers."],
+ strengths:["World #1 economics, plus elite finance, mathematics, statistics and molecular engineering.","The Core curriculum builds exceptional analytical range.","Polsky's New Venture Challenge is one of the most successful university accelerators anywhere.","Strong Chicago ecosystem and a powerful finance / consulting / tech placement pipeline."],
+ entreHeadline:"The Polsky Center pairs a Booth-taught entrepreneurship minor with the New Venture Challenge — a top-ranked accelerator that writes real equity checks to student teams, not just prize money.",
+ entreRank:"Polsky's New Venture Challenge ranks among the top U.S. university accelerators",
+ programs:[
+  {t:"Polsky Center",d:"UChicago's entrepreneurship & innovation hub spanning the College, Booth and the wider university."},
+  {t:"Entrepreneurship minor",d:"A College minor taught with Booth faculty — unusually deep access to a top-5 business school as an undergrad."},
+  {t:"New Venture Challenge (NVC)",d:"Flagship accelerator with a dedicated College NVC track and a Social NVC — culminating in real investment."},
+  {t:"Polsky Exchange",d:"Co-working, incubation and a fabrication lab supporting early-stage student ventures."}
+ ],
+ funding:[
+  {t:"NVC investment pool",d:"$150,000+ invested in 2026 finalists — equity into student companies, not just prizes."},
+  {t:"George Shultz Innovation Fund",d:"Student-driven venture fund investing in university-affiliated deep-tech and science startups."},
+  {t:"College NVC track",d:"Undergraduate-specific New Venture Challenge pathway with mentorship and seed capital."}
+ ],
+ degrees:"Entrepreneurship minor (Booth-taught) · pairs naturally with Economics, Computer Science, Statistics or Molecular Engineering",
+ founders:"NVC alumni include Grubhub (IPO) and Braintree/Venmo (acquired by PayPal) — a rare track record of billion-dollar outcomes for a university accelerator, plus a dense finance/quant founder network.",
+ appNote:"UChicago accepts the <b>Common App or Coalition</b>: the personal statement (250–650 words) plus two required UChicago essays — the ‘Why UChicago’ essay and one famously creative extended essay.",
+ optIntro:"Two required essays. The extended essay has no hard word limit (~500–700 words) — pick one prompt below.",
+ supplements:[
+  {title:"Why UChicago? (required)",req:"Required",words:"~300–600 words",cycle:"prior",text:"How does the University of Chicago, as you know it now, satisfy your desire for a particular kind of learning, community, and future? Please address with some specificity your own wishes and how they relate to UChicago."},
+  {title:"Extended essay 1 — inter-species telepathy",req:"Extended · pick 1",words:"no hard limit",cycle:"prior",text:"In an ideal world where inter-species telepathic communication exists, which species would you choose to have a conversation with, and what would you want to learn from them? Would you ask beavers for architectural advice? Octopuses about cognition? Pigeons about navigation? Ants about governance? Make your case—both for the species and the question."},
+  {title:"Extended essay 2 — uninvent one thing",req:"Extended · pick 1",words:"no hard limit",cycle:"prior",text:"If you could uninvent one thing, what would it be — and what would unravel as a result?"},
+  {title:"Extended essay 3 — contronyms",req:"Extended · pick 1",words:"no hard limit",cycle:"prior",text:"“Left” can mean remaining or departed. “Dust” can mean to add fine particles or to remove them. “Fast” can mean moving quickly or fixed firmly in place. These contronyms—words that are their own antonyms—somehow hold opposing meanings in perfect tension. Explore a contronym: a role, identity, or experience in your life that has contained its own opposite."},
+  {title:"Extended essay 4 — something we shouldn't lose",req:"Extended · pick 1",words:"no hard limit",cycle:"prior",text:"The penny is on its way out—too small to matter, too costly to keep. But not everything small should disappear. What's one object the world is phasing out that you think we can't afford to lose, and why?"},
+  {title:"Extended essay 5 — an unexpected brand extension",req:"Extended · pick 1",words:"no hard limit",cycle:"prior",text:"From Michelin Tires creating the Michelin Guide, to the audio equipment company Audio-Technica becoming one of the world's largest manufacturers of sushi robots, brand identity can turn out to be a lot more flexible than we think. Choose an existing brand, company, or institution and propose an unexpected but strangely logical new product or service for them to launch. Why is this unlikely extension exactly what the world (or the brand) needs right now?"},
+  {title:"Extended essay 6 — a favorite spurious correlation",req:"Extended · pick 1",words:"no hard limit",cycle:"prior",text:"Statistically speaking, ice cream doesn't cause shark attacks, pet spending doesn't drive the number of lawyers in California, and margarine consumption isn't responsible for Maine's divorce rate—at least, not according to conventional wisdom. But what if the statisticians got it wrong? Choose your favorite spurious correlation and make the case for why it might actually reveal a deeper, causative truth."},
+  {title:"Extended essay 7 — choose your own adventure",req:"Extended · pick 1",words:"no hard limit",cycle:"prior",text:"In the spirit of adventurous inquiry, choose one of our past prompts (or create a question of your own). Be original, creative, thought provoking. Draw on your best qualities as a writer, thinker, visionary, social critic, sage, citizen of the world, or future citizen of the University of Chicago; take a little risk, and have fun!"}
+ ],
+ cost:{mode:"private",sticker:"≈$98,300 / yr",aid:"Meets full demonstrated need with a no-loan policy (Odyssey); the Empower program offers free tuition (and more) for families under set income thresholds."},
+ cardEnt:"<b>New Venture Challenge</b> (real equity) · Booth-taught entrepreneurship minor.",
+ src:"Sourced from collegeadmissions.uchicago.edu (deadlines reflect the 2025-26 cycle; 2026-27 not yet posted), CDS 2024-25, and polsky.uchicago.edu. The extended-essay prompts are the 2025-26 set and rotate yearly."
+},
+{
+ id:"northwestern",name:"Northwestern University",short:"Northwestern",mono:"N",
+ city:"Evanston",state:"IL",type:"Private",setting:"Suburban lakefront · 12 mi from Chicago",undergrad:"≈8,850",platform:"Common App / Coalition",
+ ac:"#4E2A84",ac2:"#341c59",
+ fit:84,verdict:"Strong fit",sub:{program:8,experiential:8,outcomes:7,location:7},
+ rateNum:7.7,dlSort:1101,
+ selectivity:{rate:"≈7.7%",tier:"Most selective",note:"Calculated from CDS 2024-25 (49,474 applicants, 3,806 admitted). Early Decision is a meaningful lever.",cycle:"prior"},
+ testPolicy:"Test-optional",sat:"1500–1560",act:"34–35",fee:"$75",recs:"1 counselor + 1 teacher",opens:"August 1",
+ deadlines:[
+  {plan:"Early Decision (binding)",date:"Nov 1",note:"Decisions mid-December",cycle:"ok"},
+  {plan:"Regular Decision",date:"Jan 4",note:"Decisions late March",cycle:"ok"}
+ ],
+ bestFor:"Cross-disciplinary builders — media × tech, design × engineering, journalism × product — who want a genuinely student-run incubator (The Garage) and a structured entrepreneurship curriculum, all 12 miles from Chicago.",
+ watch:["Entrepreneurship is a certificate + co-curricular layer, not a standalone major.","The quarter system is fast and intense — protect time for building.","Ultra-selective; ED materially improves odds but is binding."],
+ strengths:["Top-10 national university strong in journalism (Medill), engineering (McCormick), communication and theatre.","Deeply collaborative, interdisciplinary culture across its schools.","The Garage is one of the best on-campus student incubators in the country.","Lakefront Evanston campus with fast access to Chicago's startup and corporate scene."],
+ entreHeadline:"The Garage is the heart of it — a buzzing on-campus incubator open to any student — backed by the Farley Center's curriculum and Northwestern's signature cross-disciplinary 'NUvention' venture courses.",
+ entreRank:"The Garage is widely regarded among the strongest university startup incubators",
+ programs:[
+  {t:"The Garage",d:"Northwestern's student startup incubator — build space, the Wildfire pre-accelerator, Jumpstart and founder residencies."},
+  {t:"Farley Center",d:"Center for Entrepreneurship & Innovation (McCormick) running the undergraduate entrepreneurship certificate / minor."},
+  {t:"NUvention",d:"Signature cross-disciplinary courses where students build real ventures (web/media, medical, energy, social)."},
+  {t:"Segal Design Institute",d:"Human-centered design and prototyping that feeds product-minded founders."}
+ ],
+ funding:[
+  {t:"VentureCat",d:"Northwestern's flagship startup competition with substantial cash prizes across categories."},
+  {t:"Wildfire & Jumpstart",d:"The Garage's pre-accelerator and idea-stage programs with mentorship, milestones and small grants."},
+  {t:"Garage residencies",d:"Selective residencies giving teams space, coaching and investor connections to keep building."}
+ ],
+ degrees:"Farley undergraduate Certificate in Entrepreneurship (and minor) · pairs with McCormick engineering, Medill journalism, design and economics",
+ founders:"Garage alumni have launched venture-backed startups across consumer, media and software; a strong Chicago and national alumni network with notable media/tech crossover.",
+ appNote:"Northwestern uses the <b>Common App / Coalition</b>. It <b>no longer requires</b> the personal statement (you may include one). One required background essay plus up to two optional short prompts.",
+ optIntro:"One required essay (≤300 words), then answer up to two of five optional prompts (under 200 words each).",
+ supplements:[
+  {title:"Background & contribution (required)",req:"Required",words:"≤300 words",cycle:"prior",text:"We want to be sure we're considering your application in the context of your personal experiences: What aspects of your background (your identity, your school setting, your community, your household, etc.) have most shaped how you see yourself engaging in Northwestern's community, be it academically, extracurricularly, culturally, politically, socially, or otherwise?"},
+  {title:"Paint The Rock (optional)",req:"Optional",words:"<200 words",cycle:"prior",text:"Painting “The Rock” is a tradition at Northwestern that invites all forms of expression—students promote campus events or extracurricular groups, support social or activist causes, show their Wildcat spirit (what we call “Purple Pride”), celebrate their culture, and more. What would you paint on The Rock, and why?"},
+  {title:"Dream up something interdisciplinary (optional)",req:"Optional",words:"<200 words",cycle:"prior",text:"Northwestern fosters a distinctively interdisciplinary culture. If you could dream up an undergraduate class, research project, or creative effort (a start-up, a design prototype, a performance, etc.), what would it be? Who might be some ideal classmates or collaborators?"},
+  {title:"Community & belonging (optional)",req:"Optional",words:"<200 words",cycle:"prior",text:"Community and belonging matter at Northwestern. Tell us about one or more communities, networks, or student groups you see yourself connecting with on campus."},
+  {title:"Our location (optional)",req:"Optional",words:"<200 words",cycle:"prior",text:"Northwestern's location is special: on the shore of Lake Michigan, steps from downtown Evanston, just a few miles from Chicago. What aspects of our location are most compelling to you, and why?"},
+  {title:"Diversity of perspectives (optional)",req:"Optional",words:"<200 words",cycle:"prior",text:"Northwestern is a place where people with diverse backgrounds from all over the world can study, live, and talk with one another. This range of experiences and viewpoints immeasurably enriches learning. How might your individual background contribute to this diversity of perspectives in Northwestern's classrooms and around our campus?"}
+ ],
+ cost:{mode:"private",sticker:"≈$99,400 / yr",aid:"Meets 100% of demonstrated need; no-loan financial aid for many families."},
+ cardEnt:"<b>The Garage</b> incubator (open to all) · Farley certificate · NUvention.",
+ src:"Sourced from admissions.northwestern.edu (ED Nov 1 / RD Jan 4 confirmed 2026-27), CDS 2024-25, thegarage.northwestern.edu and farley.northwestern.edu. Supplemental prompts reflect the 2025-26 (Class of 2030) set."
+},
+{
+ id:"unc",name:"UNC Chapel Hill",short:"UNC",mono:"U",
+ city:"Chapel Hill",state:"NC",type:"Public",setting:"College town · Research Triangle",undergrad:"≈20,200",platform:"Common App",
+ ac:"#4B9CD3",ac2:"#13294B",
+ fit:76,verdict:"Solid fit",sub:{program:7,experiential:6,outcomes:6,location:5},
+ rateNum:19,dlSort:1015,
+ selectivity:{rate:"≈19%",tier:"Highly selective",note:"Out-of-state first-years are capped near 18% by state law — far more competitive and ~$70K/yr. In-state is one of the best values in the country.",cycle:"prior"},
+ testPolicy:"Test required*",sat:"≈1390–1530",act:"≈31–34",fee:"$85",recs:"1 counselor + 1 teacher",opens:"August 1",
+ deadlines:[
+  {plan:"Early Action (non-binding)",date:"Oct 15",note:"Also the Morehead-Cain / Robertson scholarship deadline",cycle:"prior"},
+  {plan:"Regular Decision",date:"Jan 15",note:"Decisions by late March",cycle:"prior"}
+ ],
+ bestFor:"In-state students above all — an elite public at unbeatable value, with the Shuford entrepreneurship minor (pick a track: commercial, social, scientific or artistic), Launch Chapel Hill, and Kenan-Flagler's business pipeline, in the Research Triangle.",
+ watch:["Out-of-state admission is brutal (≈18% statutory cap) and costs ~$70K/yr — treat OOS as a high reach.","Test scores are required again for most applicants — confirm your waiver eligibility.","Funding and VC density trail the coastal peers on this list, though the Triangle is rising fast."],
+ strengths:["A top-5 U.S. public university and a perennial best-value pick.","Kenan-Flagler Business School with a first-year business-admit pathway.","Vibrant campus, big-time athletics and deep school spirit.","Research Triangle location — Durham/Raleigh's fast-growing tech and biotech corridor."],
+ entreHeadline:"UNC delivers entrepreneurship through the cross-campus Shuford Program — a track-based minor open to any major — plus Launch Chapel Hill and Kenan-Flagler: elite-public substance at in-state value.",
+ entreRank:"Shuford minor widely respected; no single national undergrad rank confirmed",
+ programs:[
+  {t:"Shuford Program in Entrepreneurship",d:"Campus-wide Minor in Entrepreneurship with tracks — commercial, social, scientific, artistic — open to all majors."},
+  {t:"Launch Chapel Hill",d:"Accelerator at Innovate Carolina Junction; a new KPMG-powered track helps deep-tech/AI startups land their first customers."},
+  {t:"Kenan-Flagler Business School",d:"Top undergraduate business program with an assured first-year business-admit pathway and entrepreneurship concentration."},
+  {t:"1789 Student Venture Lab",d:"Downtown student venture hub plus the 1789 Student Venture Fund providing early seed dollars."}
+ ],
+ funding:[
+  {t:"Carolina Challenge",d:"Campus pitch competition / Makeathon awarding cash to student ventures."},
+  {t:"1789 Student Venture Fund",d:"Seed grants for earliest-stage student ventures (37 teams competed for spring-2026 awards)."},
+  {t:"Morehead-Cain & Robertson",d:"Full-ride merit scholarships with enrichment funding that can bankroll ventures and summers."}
+ ],
+ degrees:"Minor in Entrepreneurship (Shuford, track-based) · Kenan-Flagler BSBA · pairs with computer science, biology and the social sciences",
+ founders:"A deep, loyal Tar Heel alumni network; the Research Triangle keeps a growing share of UNC startups (and capital) close to campus.",
+ appNote:"UNC uses the <b>Common App</b>. <b>New for 2026-27:</b> UNC removed its two short-answer supplements — only the Common App personal statement is required (plus activities and additional information).",
+ optIntro:"The two prior short-answer prompts below are shown for reference only — they are not part of the 2026-27 application.",
+ supplements:[
+  {title:"Personal quality & community impact (removed for 2026-27)",req:"Removed 26-27",words:"was 250 words",cycle:"prior",text:"Discuss one of your personal qualities and share a story, anecdote, or memory of how it helped you make a positive impact on a community. This could be your current community or another community you have engaged."},
+  {title:"An academic topic you're excited to explore (removed for 2026-27)",req:"Removed 26-27",words:"was 250 words",cycle:"prior",text:"Discuss an academic topic that you're excited to explore and learn more about in college. Why does this topic interest you? Topics could be a specific course of study, research interests, or any other area related to your academic experience in college."}
+ ],
+ cost:{mode:"public",inState:"≈$24,000–$29,000",outState:"≈$70,000",aid:"Meets 100% of demonstrated need; the Carolina Covenant is no-loan for low-income students. Morehead-Cain and Robertson offer full rides. Out-of-state aid is limited."},
+ cardEnt:"<b>Shuford</b> track-based minor · Launch Chapel Hill · Kenan-Flagler.",
+ src:"Sourced from admissions.unc.edu (2026-27 supplement removal confirmed Jun 19, 2026), CDS 2024-25 (rate/scores approximate), innovate.unc.edu and Kenan-Flagler. In/out-of-state rates and test-waiver rules should be verified for your situation."
+},
+{
+ id:"ucla",name:"University of California, Los Angeles",short:"UCLA",mono:"U",
+ city:"Los Angeles",state:"CA",type:"Public",setting:"Urban · Westwood",undergrad:"≈33,500",platform:"UC Application",
+ ac:"#2774AE",ac2:"#003B5C",
+ fit:80,verdict:"Strong fit",sub:{program:6,experiential:7,outcomes:8,location:9},
+ rateNum:9.4,dlSort:1202,
+ selectivity:{rate:"9.4%",tier:"Most selective",note:"UC Application only — no Common App. Test-blind (scores are not considered at all). Out-of-state and international students are admitted at full pay.",cycle:"prior"},
+ testPolicy:"Test-blind",sat:"—",act:"—",fee:"$80 / campus",recs:"Not used for freshmen",opens:"Aug 1 opens · Oct 1–Dec 2 submit",
+ deadlines:[
+  {plan:"UC application filing period",date:"Oct 1–Dec 2",note:"One filing window, no early/regular split. Start the app Aug 1; submit by Dec 2.",cycle:"ok"}
+ ],
+ bestFor:"California residents chasing elite value, and out-of-state students who want a global brand inside LA's media, tech and biotech economy. Best for builders who'll self-assemble across Startup UCLA, the Anderson entrepreneurship minor and Bruin Entrepreneurs.",
+ watch:["No dedicated undergraduate business school — entrepreneurship is a campus-wide ecosystem you must seek out.","Many majors are 'impacted' (extra-selective) at 33,000+ undergrads.","Test-blind: grades, rigor and the four PIQs carry everything."],
+ strengths:["A top public university with national brand power and elite research across the board.","Los Angeles wires students into entertainment, media-tech, biotech and a deep VC scene.","Huge, loyal alumni base and a powerhouse athletics culture.","A new Eggers Initiative is funding entrepreneurship courses to reach Bruins earlier."],
+ entreHeadline:"UCLA's entrepreneurship runs campus-wide rather than through one school — Startup UCLA's accelerator, an Anderson-run undergraduate minor, the Price Center and Bruin Entrepreneurs — all supercharged by Los Angeles.",
+ entreRank:"No dedicated undergrad entrepreneurship ranking; ecosystem + LA are the draw",
+ programs:[
+  {t:"Startup UCLA",d:"Campus accelerator and summer program for student founders, with the Eggers seed-funding prize."},
+  {t:"Entrepreneurship Minor (Anderson)",d:"Undergraduate minor delivered through the UCLA Anderson School of Management — unusual access to a top b-school."},
+  {t:"Price Center for Entrepreneurship & Innovation",d:"Anderson's hub for entrepreneurship education, competitions and the Anderson Venture Accelerator."},
+  {t:"Bruin Entrepreneurs",d:"Student-run network running Startup Labs, 1,000 Pitches and campus founder programming."}
+ ],
+ funding:[
+  {t:"Knapp Venture Competition",d:"Undergraduate startup competition with a $100K prize pool (≈$40K first place)."},
+  {t:"Eggers Seed Funding Prize",d:"Alumni-backed seed prizes for Bruin startups via Startup UCLA, plus an annual investor pitch barbecue."},
+  {t:"Magnify Incubator (CNSI)",d:"On-campus deep-tech/biotech incubator supporting science-driven ventures."}
+ ],
+ degrees:"Entrepreneurship Minor (via Anderson) · pairs with economics, engineering, computer science and the arts — no standalone undergrad business major",
+ founders:"A massive LA alumni network across entertainment, media-tech and biotech, with proximity to Silicon Beach venture capital.",
+ appNote:"UCLA uses the <b>UC Application</b> (not the Common App). You answer <b>4 of 8 Personal Insight Questions</b>, 350 words each. There are no UCLA-specific supplements and no letters of recommendation.",
+ optIntro:"Choose any 4 of these 8 prompts (350 words each). They are standardized across every UC campus.",
+ supplements:[
+  {title:"PIQ 1 — Leadership",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"Describe an example of your leadership experience in which you have positively influenced others, helped resolve disputes or contributed to group efforts over time."},
+  {title:"PIQ 2 — Creativity",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"Every person has a creative side, and it can be expressed in many ways: problem solving, original and innovative thinking, and artistically, to name a few. Describe how you express your creative side."},
+  {title:"PIQ 3 — Greatest talent or skill",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"What would you say is your greatest talent or skill? How have you developed and demonstrated that talent over time?"},
+  {title:"PIQ 4 — Educational opportunity or barrier",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"Describe how you have taken advantage of a significant educational opportunity or worked to overcome an educational barrier you have faced."},
+  {title:"PIQ 5 — Significant challenge",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"Describe the most significant challenge you have faced and the steps you have taken to overcome this challenge. How has this challenge affected your academic achievement?"},
+  {title:"PIQ 6 — Academic subject that inspires you",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"Think about an academic subject that inspires you. Describe how you have furthered this interest inside and/or outside of the classroom."},
+  {title:"PIQ 7 — Making your community better",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"What have you done to make your school or your community a better place?"},
+  {title:"PIQ 8 — What makes you a strong candidate",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"Beyond what has already been shared in your application, what do you believe makes you a strong candidate for admissions to the University of California?"}
+ ],
+ cost:{mode:"public",inState:"≈$41,000–$45,000",outState:"≈$73,000–$76,000",aid:"Strong need-based aid for California residents (Blue and Gold covers system tuition under income thresholds); Regents Scholarship is the top merit award. Limited aid for out-of-state students."},
+ cardEnt:"<b>Startup UCLA</b> · Anderson entrepreneurship minor · LA ecosystem.",
+ src:"Sourced from UCLA Undergraduate Admission and the UC Application (test-blind; 8 PIQs confirmed 2026-27), UCLA cost pages (Mar 2026), ugeducation.ucla.edu and Startup UCLA. Acceptance rate is the most recent published figure."
+},
+{
+ id:"usc",name:"University of Southern California",short:"USC",mono:"U",
+ city:"Los Angeles",state:"CA",type:"Private",setting:"Urban · University Park",undergrad:"≈21,000",platform:"Common App",
+ ac:"#990000",ac2:"#5e0000",
+ fit:90,verdict:"Elite for builders",sub:{program:10,experiential:9,outcomes:8,location:9},
+ rateNum:11.2,dlSort:1101,
+ selectivity:{rate:"11.2%",tier:"Highly selective",note:"Fall 2025 admit rate. USC expanded binding Early Decision to nearly all programs starting with Fall 2027.",cycle:"prior"},
+ testPolicy:"Test-optional",sat:"≈1480–1560",act:"≈33–35",fee:"$85",recs:"1 counselor + 1 teacher",opens:"August 1",
+ deadlines:[
+  {plan:"Early Decision (binding) / Early Action",date:"Nov 1",note:"New ED option for Fall 2027; decisions mid-December. Nov 1 is also the merit-scholarship priority.",cycle:"ok"},
+  {plan:"Regular Decision",date:"Jan 10",note:"Some programs (e.g., arts) have earlier dates",cycle:"ok"}
+ ],
+ bestFor:"Founders who want a dedicated, storied entrepreneurship program — the Greif Center, one of the oldest in the U.S. — or the one-of-a-kind Iovine and Young Academy (arts × tech × business), wrapped in LA and the Trojan network.",
+ watch:["Sticker price is steep and merit aid was scaled back in 2025 — model your real cost.","Highly selective overall, and Iovine and Young is its own ultra-selective application.","Essay prompts and exact deadlines for 2026-27 post on Aug 1 — verify at USC admission."],
+ strengths:["A powerhouse in film, business, engineering and communications.","The 'Trojan Family' alumni network is famously active in hiring and investing.","Los Angeles location across entertainment, media-tech and venture capital.","Iovine and Young Academy — a singular arts/technology/business degree where students launch startups before graduating."],
+ entreHeadline:"USC pairs the Lloyd Greif Center — one of the oldest and most decorated undergraduate entrepreneurship programs in the country — with the singular Iovine and Young Academy and a $300M+ startup-incubator track record.",
+ entreRank:"Long ranked among the top U.S. undergraduate entrepreneurship programs (Princeton Review)",
+ programs:[
+  {t:"Lloyd Greif Center for Entrepreneurial Studies",d:"Marshall's entrepreneurship engine — a BS in Business Administration (Entrepreneurship) plus a university-wide minor."},
+  {t:"Iovine and Young Academy",d:"BS in Arts, Technology and the Business of Innovation; project-based, with many students commercializing startups pre-graduation. New dean arrives Aug 2026."},
+  {t:"USC Incubator / Blackstone LaunchPad",d:"Campus incubator with 285+ portfolio companies; alumni ventures have raised $300M+."},
+  {t:"Viterbi & Marshall venture courses",d:"Cross-school startup courses feeding engineering and business founders."}
+ ],
+ funding:[
+  {t:"New Venture Seed Competition",d:"Greif Center competition with a $150K+ prize pool for student ventures."},
+  {t:"Incubator seed funding",d:"Seed capital and incubation for USC student startups across schools."},
+  {t:"Trojan investor network",d:"An unusually active base of alumni angels and VCs who back USC founders."}
+ ],
+ degrees:"BS in Business Administration (Entrepreneurship), Greif · BS in Arts, Technology & the Business of Innovation (Iovine and Young) · university-wide entrepreneurship minor",
+ founders:"A deep founder bench across media, consumer and tech; the Trojan network is a genuine fundraising and hiring advantage.",
+ appNote:"USC uses the <b>Common App</b>: the personal statement plus a required USC academic-interest essay, a set of fun short-answer 'quick takes,' and school-specific essays (e.g., Viterbi, Dornsife). 2026-27 prompts post at the Aug 1 launch.",
+ optIntro:"USC's most recent (2025-26) supplemental questions are shown — expect refreshed 2026-27 wording at the Aug 1 launch.",
+ supplements:[
+  {title:"Your academic interests & why USC",req:"Required",words:"250 words",cycle:"prior",text:"Describe how you plan to pursue your academic interests and why you want to explore them at USC specifically. Please feel free to address your first- and second-choice major selections."},
+  {title:"USC 'quick takes' (short answers)",req:"Required",words:"≤100 characters each",cycle:"prior",text:"A set of rapid-fire prompts, e.g.: describe yourself in three words · favorite snack · best movie of all time · dream job · your life's theme song · dream trip · the TV show you'll binge next · favorite book · a class you would teach."}
+ ],
+ cost:{mode:"private",sticker:"≈$95,000 / yr",aid:"Meets full demonstrated need; merit awards (Trustee/Presidential) exist but were scaled back in 2025 — verify current availability before counting on them."},
+ cardEnt:"<b>Greif Center</b> (oldest in U.S.) · Iovine & Young Academy · LA.",
+ src:"Sourced from USC admission (ED expansion + Nov 1 / Jan 10 dates confirmed for Fall 2027), USC Facts (11.2% Fall 2025; $75,384 tuition) and iovine-young.usc.edu. Test-optional status for 2026-27 confirmed by multiple secondary sources (Cosmic College Consulting Jun 24, Empowerly Jun 15; ~58% submitted no test). Exact prompts post at the Aug 1 Common App launch."
+},
+{
+ id:"utaustin",name:"University of Texas at Austin",short:"UT Austin",mono:"U",
+ city:"Austin",state:"TX",type:"Public",setting:"Urban · flagship",undergrad:"≈43,000",platform:"ApplyTexas / Common App",
+ ac:"#BF5700",ac2:"#333F48",
+ fit:92,verdict:"Elite for builders",sub:{program:10,experiential:9,outcomes:8,location:9},
+ rateNum:27,dlSort:1015,
+ selectivity:{rate:"≈27% overall",tier:"Selective overall · far tougher for OOS, McCombs & CS",note:"Texas residents in roughly the top 6% auto-admit to the university (top 5% for the Fall 2026 class) — but not to a specific major. Out-of-state competes for ~10% of seats; McCombs ≈9%.",cycle:"prior"},
+ testPolicy:"Test required",sat:"≈1250–1510",act:"≈27–33",fee:"$75",recs:"Optional (required for some honors)",opens:"August 1",
+ deadlines:[
+  {plan:"Early Action / priority",date:"Oct 15",note:"Honors and scholarship consideration align with this date",cycle:"prior"},
+  {plan:"Regular Decision",date:"Dec 1",note:"Decisions by Feb 15",cycle:"prior"}
+ ],
+ bestFor:"Texas residents above all: the #2-ranked undergraduate entrepreneurship program (Harkey / Princeton Review) at in-state value, inside one of America's hottest startup cities — with a Longhorn Startup pipeline that pairs CS/engineering builders with business co-founders.",
+ watch:["Out-of-state odds are brutal (~10% of seats, full sticker) — essentially a high reach for non-Texans.","Auto-admit gets you the university, not the major: McCombs (≈9%) and CS are far more competitive.","43,000 undergrads means you must be self-directed to tap the resources."],
+ strengths:["A top public flagship with elite CS, engineering (Cockrell) and business (McCombs).","Austin is a top-5 U.S. tech hub — Capital Factory, Dell, Tesla, Apple and Oracle are minutes away.","Michael Dell founded Dell in a UT dorm — founder mythology runs deep.","A huge, powerful Texas Exes alumni network."],
+ entreHeadline:"UT pairs the #2-ranked Harkey Institute — an 800-student, all-majors entrepreneurship minor — with Longhorn Startup and a Capital Factory pipeline: the best startup value in the country for a Texas resident.",
+ entreRank:"#2 undergraduate entrepreneurship — Princeton Review (also #6 U.S. News)",
+ programs:[
+  {t:"Harkey Institute for Entrepreneurial Studies",d:"McCombs hub running the campus-wide Entrepreneurship Minor — 800+ students from 150+ majors — plus a summer academy and seed fellowship."},
+  {t:"Longhorn Startup",d:"Joint McCombs/Cockrell program (Seminar, Lab, Demo Day) led by Capital Factory's Joshua Baer; teams get coworking at Capital Factory."},
+  {t:"The LaunchPad (Blackstone)",d:"All-majors hub with StartUP micro-grants ($15K/semester) and the SEAL summer accelerator (alumni have raised $100M+)."},
+  {t:"Discovery to Impact / UT Seed Fund",d:"Commercialization arm with a $10M seed fund backing UT-IP startups (recently a $250K hydrogen-tech investment)."}
+ ],
+ funding:[
+  {t:"StartUP Innovation Grants",d:"$15,000 awarded per semester in non-dilutive micro-grants ($250–$1,500) to any UT student."},
+  {t:"SEAL Accelerator",d:"Selective summer accelerator; alumni ventures have raised $100M+ with $400M+ in value."},
+  {t:"Builder's Bullpen & Texas Venture Labs",d:"Student-government pitch prize plus McCombs' investment competition feeding the Austin ecosystem."}
+ ],
+ degrees:"Entrepreneurship Minor (Harkey, all majors) · McCombs BBA + Canfield Business Honors · Bridging Disciplines certificate in Innovation, Creativity & Entrepreneurship",
+ founders:"Michael Dell (Dell), Apptronik and BeatBox among Longhorn founders; Austin's startup scene is substantially UT-seeded, keeping mentors and capital close.",
+ appNote:"UT uses <b>ApplyTexas / Common App</b>: a required essay (Topic A / the personal statement) plus three short answers. Prompts are <b>confirmed for the upcoming cycle</b> on the UT site.",
+ optIntro:"One required essay plus three short answers (≈250–300 words each).",
+ supplements:[
+  {title:"Required essay (Topic A)",req:"Required",words:"500–650 words",cycle:"ok",text:"Share an essay on any topic of your choice. It can be one you've already written, one that responds to a different prompt, or one of your own design. (The Common App personal statement satisfies this.)"},
+  {title:"Short answer — your first-choice major",req:"Required",words:"≈250–300 words",cycle:"ok",text:"Why are you interested in the major you indicated as your first-choice major?"},
+  {title:"Short answer — proudest activity",req:"Required",words:"≈250–300 words",cycle:"ok",text:"Think of all the activities — both in and outside of school — that you have been involved with during high school. Which one are you most proud of and why?"},
+  {title:"Short answer — circumstances (optional)",req:"Optional",words:"≈250–300 words",cycle:"ok",text:"Please share background on events or special circumstances that you feel may have impacted your high school academic performance."}
+ ],
+ cost:{mode:"public",inState:"≈$32,000",outState:"≈$66,000",aid:"Texas Advance Commitment covers tuition for Texas residents with family income up to ~$100K (partial to ~$125K); tuition is frozen through 2026-27. Merit is largely honors-linked; limited aid for OOS."},
+ cardEnt:"<b>#2 Harkey</b> minor · Longhorn Startup + Capital Factory · Austin.",
+ src:"Sourced from admissions.utexas.edu (essays confirmed Jun 2026; deadlines prior-cycle), McCombs/Harkey Institute (Princeton Review #2; 800 students), news.utexas.edu and onestop.utexas.edu. Auto-admit % and OOS rates should be verified each cycle."
+},
+{
+ id:"uiuc",name:"University of Illinois Urbana-Champaign",short:"UIUC",mono:"I",
+ city:"Urbana-Champaign",state:"IL",type:"Public",setting:"College town · central Illinois",undergrad:"≈36,000",platform:"Common App",
+ ac:"#FF5F05",ac2:"#13294B",
+ fit:85,verdict:"Excellent fit",sub:{program:8,experiential:8,outcomes:9,location:5},
+ rateNum:37,dlSort:1101,
+ selectivity:{rate:"≈37% overall · CS ≈7%",tier:"Selective overall · elite-selective for CS/Engineering/Gies",note:"You apply by major. Computer Science ≈7%, Engineering ≈21%, Gies Business ≈21% — far tougher than the overall rate. About 71% of students are Illinois residents.",cycle:"prior"},
+ testPolicy:"Test-optional",sat:"≈1390–1520",act:"≈30–34",fee:"$75",recs:"Not required",opens:"≈September 1",
+ deadlines:[
+  {plan:"Early Action",date:"Nov 1",note:"Strongly recommended for CS / Engineering / Gies and merit",cycle:"prior"},
+  {plan:"Regular Decision",date:"Jan 5",note:"Decisions by early March",cycle:"prior"}
+ ],
+ bestFor:"Technical founders — especially CS and engineering — who want a world-class engineering school, one of the densest tech-founder alumni networks anywhere (the 'PayPal Mafia' has roots here), and real on-campus funding through iVenture and Cozad.",
+ watch:["Admission is by major: CS (≈7%) and Engineering/Gies (≈21%) are far harder than the headline rate — apply with a realistic major strategy.","College-town setting; the nearest big city (Chicago) is ~2.5 hours away.","Large and self-directed — the ecosystem is rich but you must seek it out."],
+ strengths:["Top-5 U.S. engineering and computer science.","An extraordinary tech-founder alumni base — YouTube, PayPal, Yelp, AMD and Mosaic/Netscape roots.","Research Park + EnterpriseWorks incubator put 200+ companies on campus.","Exceptional value, especially for Illinois residents."],
+ entreHeadline:"Illinois is a technical-founder factory: the Cozad New Venture Challenge (a record $700K+ in 2026), the iVenture Accelerator (up to $20K non-dilutive) and a 'PayPal Mafia' alumni network turn engineering talent into companies.",
+ entreRank:"Powerhouse tech-founder pipeline; entrepreneurship via Grainger's Landuyt/TEC + Gies",
+ programs:[
+  {t:"Landuyt Center / TEC (Grainger)",d:"Engineering's entrepreneurship hub (formerly the Technology Entrepreneur Center) running Cozad and a tech-venture course suite."},
+  {t:"iVenture Accelerator",d:"Campus-wide accelerator (via Gies) offering up to $20,000 non-dilutive funding, a summer intensive and mentorship to top student startups."},
+  {t:"Gies — Strategy, Innovation & Entrepreneurship",d:"A dedicated undergraduate entrepreneurship major plus a campus-wide Entrepreneurship Minor (16 credits, 70+ electives)."},
+  {t:"Research Park & EnterpriseWorks",d:"On-campus incubator and a 200+ company research park where students intern and spin out ventures."}
+ ],
+ funding:[
+  {t:"Cozad New Venture Challenge",d:"Illinois' largest venture competition — a record $700,000+ with a first-ever $100,000 grand prize in 2026 (350+ teams)."},
+  {t:"iVenture Accelerator",d:"Up to $20,000 non-dilutive per startup; alumni have gone to Y Combinator and Techstars and raised $160M+."},
+  {t:"Orange & Blue Ventures",d:"A new (2026) student-run venture fund letting Illinois students invest real capital in startups."}
+ ],
+ degrees:"Gies BS in Strategy, Innovation & Entrepreneurship · campus-wide Entrepreneurship Minor · ILEE dual degree (engineering + entrepreneurship) in Grainger",
+ founders:"Marc Andreessen (Netscape/a16z), Max Levchin and the PayPal Mafia, Jawed Karim & Steve Chen (YouTube), Jeremy Stoppelman (Yelp) — one of the most concentrated tech-founder alumni clusters of any public university.",
+ appNote:"UIUC uses the <b>Common App</b>: the personal statement plus short <b>major-specific</b> supplemental essays (≈150 words each). You apply directly to a college and a first-choice major.",
+ optIntro:"Most applicants answer two major-focused prompts (≈150 words each); a second-choice essay is recommended for competitive majors.",
+ supplements:[
+  {title:"Experience related to your first-choice major",req:"Required",words:"≈150 words",cycle:"prior",text:"Explain, in detail, an experience you've had in the past 3 to 4 years related to your first-choice major. This can be an experience from an extracurricular activity, in a class you've taken, or through something else."},
+  {title:"Goals and how your major helps",req:"Required",words:"≈150 words",cycle:"prior",text:"Describe your personal and/or career goals after graduating from Illinois and how your selected first-choice major will help you achieve them."},
+  {title:"Second-choice major (recommended)",req:"Optional",words:"≈150 words",cycle:"prior",text:"Please explain your interest in your second-choice major or your overall academic or career goals."}
+ ],
+ cost:{mode:"public",inState:"≈$33,000",outState:"≈$60,000–$69,000",aid:"Illinois Commitment covers full tuition and fees for in-state families earning ≤$75K. Engineering and Gies carry differential tuition; out-of-state engineering cost rivals private universities."},
+ cardEnt:"<b>Cozad</b> ($700K+) · iVenture ($20K) · PayPal-Mafia alumni.",
+ src:"Sourced from admissions.illinois.edu (major-specific admit rates 2025; deadlines prior-cycle), landuyt.illinois.edu (Cozad 2026), iventure.illinois.edu and giesbusiness.illinois.edu. The TEC is being renamed the Landuyt Center (Board approval pending)."
+},
+{
+ id:"indiana",name:"Indiana University Bloomington",short:"Indiana",mono:"I",
+ city:"Bloomington",state:"IN",type:"Public",setting:"Classic Big Ten college town",undergrad:"≈48,000",platform:"Common App / IU app",
+ ac:"#9E1B32",ac2:"#5c0a18",
+ fit:86,verdict:"Excellent fit",sub:{program:9,experiential:8,outcomes:7,location:5},
+ rateNum:80,dlSort:1101,
+ selectivity:{rate:"≈80%",tier:"Accessible — the most attainable of the 12",note:"Most accessible overall; Kelley Direct Admit (now a holistic, KPI-based review) is the competitive gate. IU is generous with automatic merit for strong out-of-state students.",cycle:"prior"},
+ testPolicy:"Test-optional",sat:"≈1230–1440",act:"≈26–33",fee:"$65",recs:"Optional",opens:"August 1",
+ deadlines:[
+  {plan:"Early Action / scholarship priority",date:"Nov 1",note:"Priority for Direct Admit, honors and scholarships",cycle:"prior"},
+  {plan:"Regular (rolling thereafter)",date:"Feb 1",note:"Largely rolling and non-binding",cycle:"prior"}
+ ],
+ bestFor:"Students who want a top-5 undergraduate entrepreneurship major (Kelley's Entrepreneurship & Corporate Innovation) without a single-digit admit rate — an outstanding Target/Likely with strong merit aid that anchors a balanced college list.",
+ watch:["Kelley Direct Admit is competitive — miss it and you reapply to Kelley as a sophomore via Standard Admit.","Bloomington is a classic college town; coastal VC density is lower (Indianapolis/Midwest is the network).","Strongest for business-model founders; less of a deep-tech hardware pipeline than the engineering powerhouses."],
+ strengths:["Kelley School of Business — a top public business school strong in entrepreneurship, finance and marketing.","Genuinely accessible admission with generous automatic merit for strong applicants.","A vibrant, quintessential Big Ten campus experience.","Mark Cuban (Kelley alum) anchors a real founder-and-funder network."],
+ entreHeadline:"Kelley's Entrepreneurship & Corporate Innovation major is a perennial top-5 undergraduate program — paired with IU Innovates' incubator and the JCEI's competitions — at an admit rate that makes it a rare elite-program Target.",
+ entreRank:"#5 undergraduate entrepreneurship — U.S. News (Kelley)",
+ programs:[
+  {t:"Kelley — Entrepreneurship & Corporate Innovation",d:"A dedicated, top-5-ranked undergraduate entrepreneurship major inside a leading public business school."},
+  {t:"Johnson Center for Entrepreneurship & Innovation (JCEI)",d:"Kelley's entrepreneurship engine — courses, the Velocity living-learning center and pitch competitions."},
+  {t:"IU Innovates",d:"Campus-wide incubator and accelerator with seed funding, mentorship and the Founders & Funders Network."},
+  {t:"Shoemaker Innovation Center",d:"Luddy School maker/innovation hub feeding tech-leaning student ventures."}
+ ],
+ funding:[
+  {t:"Clapp IDEA Competition",d:"JCEI pitch competition awarding up to $35,000 to student startups (a 2026 winner took $25,000 for PilliPop)."},
+  {t:"IU Innovates incubator + Startup Summer",d:"Seed funding, workspace and a paid summer build program at The Mill / Amplify Bloomington."},
+  {t:"Founders & Funders Network Venture Summit",d:"Connects student founders with IU-affiliated entrepreneurs and investors (incl. a Broadcast.com co-founder)."}
+ ],
+ degrees:"Kelley BS in Entrepreneurship & Corporate Innovation · certificate in entrepreneurship · pairs with Luddy (informatics/CS) and the arts",
+ founders:"Mark Cuban (Kelley) headlines a deep alumni-investor network; the Indianapolis and Midwest startup scenes are the immediate ecosystem.",
+ appNote:"IU uses the <b>Common App</b> (or the IU application). An IU-specific essay on your academic and career plans is requested; IU has historically been test-optional with a relatively light essay requirement.",
+ optIntro:"IU's academic-interest essay (most recent wording shown) — confirm the 2026-27 prompt at the Aug 1 launch.",
+ supplements:[
+  {title:"Academic & career interests",req:"Requested",words:"200–400 words",cycle:"prior",text:"Describe your academic and career plans and any special interest (for example, undergraduate research, academic interests, or leadership opportunities) that you are eager to pursue as an undergraduate at Indiana University. If you encountered any unusual circumstances, challenges, or obstacles in pursuit of your education, share those experiences and how you overcame them."}
+ ],
+ cost:{mode:"public",inState:"≈$30,600",outState:"≈$63,000",aid:"IU is unusually generous with automatic merit for strong out-of-state students (Selective/Automatic Scholarships), which can substantially narrow the in-state/OOS gap."},
+ cardEnt:"<b>Kelley #5</b> entrepreneurship major · IU Innovates · accessible.",
+ src:"Sourced from Indiana University admissions (test-optional; rolling/EA dates prior-cycle), the Kelley School (U.S. News #5 entrepreneurship; Direct Admit now holistic), kelley.iu.edu and news.iu.edu. Overall rate and merit specifics should be verified."
+},
+{
+ id:"berkeley",name:"University of California, Berkeley",short:"UC Berkeley",mono:"B",
+ city:"Berkeley",state:"CA",type:"Public",setting:"Urban · SF Bay Area",undergrad:"≈33,100",platform:"UC Application",
+ ac:"#003262",ac2:"#010133",
+ fit:94,verdict:"Elite for builders",sub:{program:9,experiential:9,outcomes:10,location:10},
+ rateNum:11.4,dlSort:1202,
+ selectivity:{rate:"11.4%",tier:"Most selective · EECS & M.E.T. far lower",note:"UC Application; test-blind. EECS admits under 5%; the M.E.T. business+engineering dual degree is ≈2–3%. Out-of-state and international students pay full freight.",cycle:"prior"},
+ testPolicy:"Test-blind",sat:"—",act:"—",fee:"$80 / campus",recs:"Not used for freshmen",opens:"Aug 1 opens · Oct 1–Dec 2 submit",
+ deadlines:[
+  {plan:"UC application filing period",date:"Oct 1–Dec 2",note:"One filing window; start Aug 1, submit by Dec 2. M.E.T. may add steps.",cycle:"ok"}
+ ],
+ bestFor:"Technical founders who want the single best public-university launchpad into Silicon Valley — Berkeley produces among the most VC-backed founders of any school — via SCET, SkyDeck and (for business + engineering) the ultra-selective M.E.T. program.",
+ watch:["Massive scale and 'impacted' majors; EECS (<5%) and M.E.T. (≈2–3%) are brutally selective.","Test-blind: the four PIQs, course rigor and GPA carry everything.","Out-of-state students pay full freight with very limited aid."],
+ strengths:["The #1 public university, with world-class CS, EECS and engineering.","Adjacent to Silicon Valley — unmatched proximity to venture capital and talent.","PitchBook ranks Berkeley #1 among universities for producing VC-backed founders.","A research powerhouse feeding a constant stream of deep-tech startups."],
+ entreHeadline:"Berkeley is the #1 public-university founder factory: the Sutardja Center (SCET) and its Collider Cup feed Berkeley SkyDeck — a top global accelerator — minutes from the world's deepest venture capital.",
+ entreRank:"#1 university for VC-backed founders (PitchBook); SCET certificate + M.E.T. dual degree",
+ programs:[
+  {t:"Sutardja Center (SCET)",d:"Engineering's entrepreneurship center; a Certificate in Entrepreneurship & Technology open to undergrads, plus the Collider Cup showcase."},
+  {t:"Berkeley SkyDeck",d:"Berkeley's flagship accelerator (Pad-13) backing student, alumni and external startups with funding and a deep VC network."},
+  {t:"M.E.T. (Management, Entrepreneurship & Technology)",d:"A freshman-admit dual degree (Haas + Engineering), ≈2–3% admit — built expressly for technical founders."},
+  {t:"Big Ideas / Free Ventures / Jacobs Institute",d:"Campus-wide contest, student-run accelerator and a design-innovation hub for early ventures."}
+ ],
+ funding:[
+  {t:"Berkeley SkyDeck Pad-13",d:"Selective incubator track with investment and demo days; SCET's top Collider Cup teams advance here."},
+  {t:"Big Ideas Contest",d:"Long-running campus innovation competition awarding seed funding across categories."},
+  {t:"Silicon Valley VC pipeline",d:"Bay Area proximity means student teams routinely raise from top VCs (recent ACC InVenture and SkyDeck wins)."}
+ ],
+ degrees:"Certificate in Entrepreneurship & Technology (SCET) · M.E.T. dual degree (Haas + Engineering) · Haas undergraduate program (junior entry) · pairs with EECS",
+ founders:"Berkeley produces among the most VC-backed founders of any university (from Apple's Steve Wozniak to a deep modern roster) — and the Bay Area keeps capital and mentors next door.",
+ appNote:"Berkeley uses the <b>UC Application</b> (not the Common App). You answer <b>4 of 8 Personal Insight Questions</b>, 350 words each. No Berkeley-specific supplements for most applicants; M.E.T. applicants complete extra steps.",
+ optIntro:"Choose any 4 of these 8 prompts (350 words each) — standardized across every UC campus.",
+ supplements:[
+  {title:"PIQ 1 — Leadership",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"Describe an example of your leadership experience in which you have positively influenced others, helped resolve disputes or contributed to group efforts over time."},
+  {title:"PIQ 2 — Creativity",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"Every person has a creative side, and it can be expressed in many ways: problem solving, original and innovative thinking, and artistically, to name a few. Describe how you express your creative side."},
+  {title:"PIQ 3 — Greatest talent or skill",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"What would you say is your greatest talent or skill? How have you developed and demonstrated that talent over time?"},
+  {title:"PIQ 4 — Educational opportunity or barrier",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"Describe how you have taken advantage of a significant educational opportunity or worked to overcome an educational barrier you have faced."},
+  {title:"PIQ 5 — Significant challenge",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"Describe the most significant challenge you have faced and the steps you have taken to overcome this challenge. How has this challenge affected your academic achievement?"},
+  {title:"PIQ 6 — Academic subject that inspires you",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"Think about an academic subject that inspires you. Describe how you have furthered this interest inside and/or outside of the classroom."},
+  {title:"PIQ 7 — Making your community better",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"What have you done to make your school or your community a better place?"},
+  {title:"PIQ 8 — What makes you a strong candidate",req:"Pick 4 of 8",words:"350 words",cycle:"ok",text:"Beyond what has already been shared in your application, what do you believe makes you a strong candidate for admissions to the University of California?"}
+ ],
+ cost:{mode:"public",inState:"≈$45,000–$54,000",outState:"≈$76,000–$94,000",aid:"Strong need-based aid for California residents (Blue and Gold); Regents' is the top merit award. Out-of-state aid is very limited."},
+ cardEnt:"<b>#1 VC-founder factory</b> · SCET + SkyDeck · M.E.T. dual degree.",
+ src:"Sourced from UC Berkeley Admissions and the UC Application (test-blind; 8 PIQs confirmed 2026-27), Berkeley OPA (11.43% rate), scet.berkeley.edu, skydeck.berkeley.edu and haas.berkeley.edu. EECS/M.E.T. rates are secondary estimates."
+},
+{
+ id:"umich",name:"University of Michigan–Ann Arbor",short:"U-Michigan",mono:"M",
+ city:"Ann Arbor",state:"MI",type:"Public",setting:"Quintessential college town",undergrad:"≈33,000",platform:"Common App",
+ ac:"#00274C",ac2:"#001327",
+ fit:88,verdict:"Excellent fit",sub:{program:8,experiential:9,outcomes:9,location:6},
+ rateNum:16,dlSort:1101,
+ selectivity:{rate:"≈16% overall · Ross BBA ≈7%",tier:"Highly selective",note:"In-state is a strong value; out-of-state students are admitted at full pay. Ross BBA first-year direct admit is ≈7% (924 admits from 13,019).",cycle:"prior"},
+ testPolicy:"Test-optional",sat:"≈1350–1530",act:"≈31–34",fee:"$75",recs:"1 counselor + 1 teacher",opens:"August 1",
+ deadlines:[
+  {plan:"Early Action (non-binding)",date:"Nov 1",note:"Decisions by late January",cycle:"prior"},
+  {plan:"Regular Decision",date:"Feb 1",note:"Decisions by early April",cycle:"prior"}
+ ],
+ bestFor:"In-state students seeking elite value, Ross BBA aspirants, and technical founders who want one of the country's richest student-run venture ecosystems — the Zell Lurie Institute's real-money funds plus optiMize — at a top public.",
+ watch:["Out-of-state cost is high (~$78K) and admission is competitive; Ross BBA direct admit is ≈7%.","Miss Ross direct admit and cross-campus transfer admission is the (competitive) backup.","Very large; Ann Arbor is a great college town but not a major-metro VC hub."],
+ strengths:["An elite public with top-ranked business (Ross) and engineering.","Zell Lurie's student-run venture funds let undergraduates invest real capital.","A massive, fiercely loyal alumni network (Larry Page and Bill Joy among founders).","A deep, well-funded experiential ecosystem (optiMize, Desai, Michigan Business Challenge)."],
+ entreHeadline:"Michigan's edge is real-money, student-run capital: the Zell Lurie Institute's Wolverine Venture Fund and Zell Founders Fund, plus optiMize and the Center for Entrepreneurship's campus-wide minor.",
+ entreRank:"Zell Lurie (Ross) consistently a top-ranked entrepreneurship program",
+ programs:[
+  {t:"Zell Lurie Institute (Ross)",d:"Ross's entrepreneurship hub running student-led venture funds — the Wolverine Venture Fund, Zell Founders Fund and Social Venture Fund."},
+  {t:"Center for Entrepreneurship (Engineering)",d:"Runs the campus-wide Minor in Entrepreneurship open to every undergraduate, plus the TechLab at Mcity."},
+  {t:"optiMize",d:"Student-led social-innovation accelerator with a summer fellowship and grant funding."},
+  {t:"Desai Accelerator / Innovate Blue",d:"Cross-campus accelerator and the umbrella connecting Michigan's many entrepreneurship resources."}
+ ],
+ funding:[
+  {t:"Michigan Business Challenge",d:"Flagship campus startup competition with substantial cash prizes across tracks."},
+  {t:"Student-run venture funds",d:"Undergraduates help invest real capital through Zell Lurie's Wolverine Venture Fund and Social Venture Fund."},
+  {t:"optiMize grants & 1,000 Pitches",d:"Idea-stage grants and a campus-wide pitch funnel for first-time founders."}
+ ],
+ degrees:"Ross BBA (with entrepreneurship) · campus-wide Minor in Entrepreneurship (CFE) · pairs with engineering, CS and the College of LSA",
+ founders:"Larry Page (Google), Bill Joy (Sun) and Tom Monaghan among Michigan founders; the Wolverine alumni network is enormous and active.",
+ appNote:"Michigan uses the <b>Common App</b>: the personal statement plus <b>two required</b> Michigan essays — confirmed for 2026-27 on the official site.",
+ optIntro:"Two required essays — a community/contribution essay and a 'why this school or college' essay.",
+ supplements:[
+  {title:"Community & contribution",req:"Required",words:"100–300 words",cycle:"ok",text:"At the University of Michigan, we are focused on developing leaders and citizens who will challenge the present and enrich the future. In your essay, share with us how you are prepared to contribute to these goals. This could include the people, places, experiences, or aspirations that have shaped your journey and future plans."},
+  {title:"Why this school or college",req:"Required",words:"100–550 words",cycle:"ok",text:"Describe the unique qualities that attract you to the specific undergraduate college or school (including preferred admission and dual degree programs) to which you are applying at the University of Michigan. How would that curriculum support your interests?"}
+ ],
+ cost:{mode:"public",inState:"≈$35,000",outState:"≈$78,000",aid:"The Go Blue Guarantee covers tuition for in-state families under set income thresholds, and need is well met for residents. Out-of-state aid is more limited."},
+ cardEnt:"<b>Zell Lurie</b> student-run funds · optiMize · Ross BBA.",
+ src:"Sourced from admissions.umich.edu (two essays confirmed 2026-27; EA/RD prior-cycle), CDS-based ranges, zli.umich.edu (Zell Lurie) and cfe.umich.edu. Overall and Ross BBA rates are most-recent figures."
+}
+];
+
+/* ============ NEWS (refreshed daily by the scout agent) ============ */
+const NEWS={
+ duke:[
+  {date:"2026-06-25",source:"The Duke Chronicle",title:"New 'Duke Embark' program lets first-years start at the Marine Lab",url:"https://www.dukechronicle.com/article/duke-university-embark-new-program-allows-first-years-spend-fall-semester-at-marine-lab-beaufort-admissions-acceptance-20260625",blurb:"Beginning Class of 2031: incoming students can spend their first semester at Duke's Beaufort Marine Lab before moving to Durham — indicate interest in the Duke application."},
+  {date:"2026-06-08",source:"Duke Pratt Engineering",title:"Duke hardware startup Synapse Semiconductor selected for Y Combinator",url:"https://pratt.duke.edu/news/synapse-semiconductor-y-combinator/",blurb:"A retina-inspired semiconductor venture co-founded by a 2026 Duke grad joins YC's summer batch — a rare hardware admit and a marker of Duke's research-to-startup pipeline."},
+  {date:"2026-06-08",source:"Capital Analytics / Duke President",title:"Duke Capital Partners has invested $70M in startups; portfolio raised $2.4B in 5 years",url:"https://capitalanalyticsassociates.com/spotlight-on-vincent-price-president-duke-university/",blurb:"Duke's president confirms the scope of the startup ecosystem: 5 IPOs, 14 acquisitions, and nearly 60% of companies staying in North Carolina."},
+  {date:"2026-04-28",source:"Duke I&E",title:"Entrepreneurial Leaders Network names its 2026 cohort",url:"https://entrepreneurship.duke.edu/story/duke-eln-announces-new-cohort-2026/",blurb:"Fifteen new members bring Duke's selective founder network to nearly 100, spanning AI, health tech, deep tech and life sciences."},
+  {date:"2026-04-09",source:"Duke Today",title:"Student founders win $110K+ at the 2026 Duke Startup Showcase",url:"https://today.duke.edu/2026/04/concept-center-stage",blurb:"36 student ventures pitched; AI medical-device venture Helian took the top undergraduate prize at Duke I&E's flagship showcase."}
+ ],
+ nyu:[
+  {date:"2026-06-25",source:"NYU",title:"Student-led NYU Impact Investment Fund makes its 7th investment",url:"https://www.nyu.edu/about/news-publications/news/2026/june/student-led-nyu-impact-investment-fund-invests-in-edtech-company.html",blurb:"The cross-school, student-run fund (nearly 300 students, $200K invested) backed an EdTech startup building STEM tools for deaf and hard-of-hearing youth."},
+  {date:"2026-06-23",source:"NYU Leslie eLab",title:"2026 NYU Summer Launchpad is live — 10 teams, $15K each in funding + mentorship",url:"https://entrepreneur.nyu.edu/blog/2026/06/23/2026-nyu-summer-launchpad-meet-the-mentors-guiding-this-years-founders/",blurb:"The cohort runs 9 weeks with a roster of unicorn-founders and VCs as mentors — the clearest proof point that the eLab accelerator model is active and well-resourced."},
+  {date:"2026-06-12",source:"NYU Leslie eLab",title:"NYU accelerator startup Relay Response scales pocket-CPR tech",url:"https://entrepreneur.nyu.edu/blog/2026/06/12/beyond-the-bench-how-relay-response-is-putting-cpr-in-every-pocket/",blurb:"A founder credits NYU's Tech Venture Accelerator for the commercial 'aha' — Relay Response now has a Columbia contract and a 170-site VA rollout."},
+  {date:"2026-05-13",source:"NYU Stern",title:"Endless Frontier Labs graduates 74 startups; ranked top 5% of U.S. accelerators",url:"https://www.globenewswire.com/news-release/2026/05/13/3294309/0/en/The-Endless-Frontier-Labs-at-NYU-Stern-Graduated-its-2025-2026-Cohort-and-The-Elizabeth-Elting-Venture-Fund-Launched-by-Elizabeth-Elting-MBA-92-With-Support-From-Stan-Moss-MS-17-Ba.html",blurb:"NYU Stern's science-and-tech accelerator — no fees, no equity — reports $3.2B raised by 243 graduates and two unicorns in eight years."}
+ ],
+ uchicago:[
+  {date:"2026-06-24",source:"UChicago News",title:"Polsky launches Third Coast Foundry startup hub in San Francisco",url:"https://news.uchicago.edu/story/uchicago-backed-startup-hub-third-coast-foundry-marks-grand-opening-san-francisco",blurb:"A UChicago-led hub with eight Midwest universities opens in SF to connect student founders with Bay Area capital; its Demo Day drew investors managing $110B+."},
+  {date:"2026-06-17",source:"Polsky Center",title:"George Shultz Innovation Fund awards $250K each to two UChicago startups",url:"https://polsky.uchicago.edu/2026/06/17/george-shultz-innovation-fund-awards-250k-to-parasol-medtech-and-signl/",blurb:"In its 15th year, the fund has invested $10.4M in 83 startups that have raised $327M+ in follow-on capital."},
+  {date:"2026-06-15",source:"Polsky Center",title:"UChicago & Station F launch Paris summer startup internships for undergrads",url:"https://polsky.uchicago.edu/2026/06/15/university-of-chicago-and-station-f-launch-new-summer-startup-internship-program-in-paris/",blurb:"25 UChicago undergraduates are placed with 16 French tech startups at the world's largest startup campus — fully funded."},
+  {date:"2026-06-05",source:"UChicago News",title:"$2.1M awarded at the 30th New Venture Challenge; Slideflow Labs wins $575K",url:"https://news.uchicago.edu/story/cancer-pathology-ai-company-takes-first-2026-edward-l-kaplan-71-new-venture-challenge",blurb:"The NVC — which launched Grubhub and Venmo/Braintree — crowned a cancer-pathology AI startup at its 30th edition."}
+ ],
+ northwestern:[
+  {date:"2026-06-24",source:"NBC Bay Area",title:"Northwestern joins Third Coast Foundry, returns to San Francisco",url:"https://www.nbcbayarea.com/news/local/san-francisco-midwest-universities-hub-entrepreneurship/4103899/",blurb:"NU is a founding partner in the new Midwest-universities startup hub in SoMa, reconnecting its student founders to Bay Area investors."},
+  {date:"2026-06-18",source:"Velocity Currents / VCF",title:"Northwestern-affiliated ventures raised $250M+ in recent months",url:"https://thecurrentbyvcf.substack.com/p/velocity-currents-17th-edition",blurb:"Wiliot ($75M), Scapia ($63M) and Vi ($145M at a $1.64B valuation) among NU-affiliated fundraises tracked alongside VentureCat 2026 results."},
+  {date:"2026-05-28",source:"Northwestern Engineering",title:"HaptE wins the $100K VentureCat grand prize",url:"https://www.mccormick.northwestern.edu/news/articles/2026/05/mccormick-student-entrepreneurs-win-venturecat-grand-prize/",blurb:"Student founders behind an AI warehouse-vision system topped VentureCat 2026 ($180K total awarded); the venture was built over three years at The Garage."},
+  {date:"2026-05-27",source:"Northwestern Pritzker Law",title:"Entrepreneurship Law Center backs hundreds of student founders",url:"https://news.law.northwestern.edu/news/entrepreneurship-law-center-launches-startups-students-careers/",blurb:"The Donald Pritzker Entrepreneurship Law Center holds office hours at The Garage and supports VentureCat with free legal work for startups."}
+ ],
+ unc:[
+  {date:"2026-06-22",source:"GrepBeat",title:"UNC startup Sensible raises $155K+ from Innovate Carolina and Harvard for menstrual-health tech",url:"https://grepbeat.com/2026/06/22/sensible-chapel-hill-startup-streamlines-menstrual-health-tracking/",blurb:"A UNC Gillings-born startup, backed by Launch Chapel Hill, raised $155K+ in non-dilutive pitch winnings — a live proof point of the UNC founder ecosystem."},
+  {date:"2026-06-19",source:"UNC Admissions",title:"UNC removes its two short-answer supplements for 2026-27",url:"https://admissions.unc.edu/short-essays-removed-from-carolinas-2026-2027-application/",blurb:"Confirmed: only the Common App personal statement is required this cycle — UNC dropped its two 250-word short answers to simplify the application."},
+  {date:"2026-06-18",source:"UNC-Chapel Hill",title:"New KPMG-powered Launch Chapel Hill accelerator helps 32 startups land customers",url:"https://www.unc.edu/posts/2026/06/18/new-kpmg-powered-accelerator-lands-customers-faster/",blurb:"A UNC–KPMG–Town of Chapel Hill accelerator for AI/deep-tech startups doubled applications in year one (≈20% acceptance per cohort)."},
+  {date:"2026-04-01",source:"Innovate Carolina",title:"1789 Student Venture Fund backs 18 student startups",url:"https://innovate.unc.edu/spring-2026-1789-svf-awardees/",blurb:"$28,150 awarded in a competitive spring cycle; fund-backed student teams have since raised $2M+, and a Shuford entrepreneur was among the winners."}
+ ],
+ ucla:[
+  {date:"2026-06-04",source:"UCLA CNSI / Magnify",title:"UCLA incubator startup Meteor Biotech earns spatial-biology recognition",url:"https://magnify.cnsi.ucla.edu/2026/06/04/june-3-2026-magnify-incubator-startup-meteor-biotech-gains-recognition-for-spatial-biology-platform/",blurb:"A startup in UCLA's Magnify incubator placed at a 2026 startup competition — a window into UCLA's deep-tech and biotech founder ecosystem."},
+  {date:"2026-05-01",source:"UCLA Undergraduate Education",title:"Eggers gift launches new undergraduate entrepreneurship courses",url:"https://www.ugeducation.ucla.edu/2026/05/01/barry-and-meredith-eggers-make-pledge-to-boost-bruin-entrepreneurship-at-ucla/",blurb:"Lightspeed's Barry Eggers funds a 5-year pilot of entrepreneurship courses to reach Bruins earlier — building on Startup UCLA and the Anderson minor."},
+  {date:"2026-04-24",source:"UCLA Newsroom",title:"UCLA again the most-applied-to university in the nation",url:"https://newsroom.ucla.edu/releases/uclabound-admitted-transfer-students-2026",blurb:"UCLA drew more applications than any U.S. four-year university, including 30,000+ transfer applicants — a reminder of how competitive admission is."}
+ ],
+ usc:[
+  {date:"2026-06-23",source:"USC Today",title:"Anijo Mathew named dean of the Iovine and Young Academy",url:"https://today.usc.edu/anijo-mathew-named-dean-of-usc-jimmy-iovine-and-andre-young-academy/",blurb:"A designer-entrepreneur (founder of Vamonde) takes over USC's arts/tech/business academy on Aug 1, calling it 'an innovation engine for the entire university.'"},
+  {date:"2026-05-08",source:"USC Viterbi",title:"Student team spins NeuroChron out of a senior project",url:"https://viterbischool.usc.edu/news/2026/05/neurochron-detecting-dementia-before-symptoms-appear/",blurb:"Biomedical-engineering seniors plus an Iovine and Young co-founder turned an MRI brain-age tool into an early-stage startup — classic USC cross-disciplinary founding."},
+  {date:"2026-04-15",source:"Annenberg Media",title:"Iovine and Young juniors build 'Editory' for newsrooms",url:"https://www.uscannenbergmedia.com/2026/04/15/iovine-and-young-students-create-a-news-app-that-scores-media-bias/",blurb:"Two IYA juniors pivoted an AI news app into a video tool for journalists, crediting USC coursework plus Marshall and Annenberg support."}
+ ],
+ utaustin:[
+  {date:"2026-05-19",source:"Giving to UT Austin",title:"New endowment expands the Harkey Institute (ranked #2 nationally)",url:"https://giving.utexas.edu/maximizing-potential/",blurb:"A gift funds a summer seed-fund fellowship for Harkey founders; the entrepreneurship minor now serves 800 students from 150+ majors."},
+  {date:"2026-05-04",source:"UT Austin News",title:"UT Seed Fund invests $250K in hydrogen startup Celadyne",url:"https://news.utexas.edu/2026/05/04/ut-startup-to-scale-hydrogen-fuel-cell-tech-with-ut-seed-fund-investment/",blurb:"Discovery to Impact's $10M seed fund (11 startups since 2022) backs a Cockrell Engineering spinout — the research-to-startup pipeline at work."},
+  {date:"2026-04-03",source:"UT Austin News",title:"Inaugural 'Builder's Bullpen' pitch competition crowns SynapSense",url:"https://news.utexas.edu/2026/04/03/builders-bullpen-showcases-student-entrepreneurs/",blurb:"Student government's new $5K pitch event drew 150+ attendees and alumni judges (incl. BeatBox's Justin Fenchel) — proof of UT's broad founder culture."}
+ ],
+ uiuc:[
+  {date:"2026-05-28",source:"Gies Business",title:"Agritourism startup Agrivoy wins a Cozad prize",url:"https://giesbusiness.illinois.edu/news/2026/05/28/agritourism-hub-agrivoy-claims-voitik-prize-at-cozad-new-venture-competition",blurb:"An 'Airbnb for agritourism' built by Illinois students took a Cozad prize and targets an October launch — a snapshot of the Cozad/iVenture pipeline."},
+  {date:"2026-04-22",source:"Gies Business",title:"Student startup MailWand rebuilds email for the AI era",url:"https://giesbusiness.illinois.edu/news/2026/04/22/mailwand-hopes-to-revolutionize-digital-conversation-management--starting-with-rebuilding-email-for-the-ai-era",blurb:"A CS-to-MSTM founder used Cozad, the TEC and the iVenture pathway to refine her prototype — Illinois' build-and-fund ecosystem in action."},
+  {date:"2026-04-17",source:"Landuyt Center / Illinois",title:"Cozad New Venture Challenge awards a record $700K+ (first $100K grand prize)",url:"https://landuyt.illinois.edu/news/82423",blurb:"In its 26th year, Illinois' largest venture competition drew 350+ teams and 900+ students and added a first-ever $100,000 grand prize."}
+ ],
+ indiana:[
+  {date:"2026-06-23",source:"TDPel Media",title:"IU Ventures partners with The Wisory on IntelliQ-U startup evaluation platform",url:"https://tdpelmedia.com/the-wisory-and-iu-ventures-strengthen-investment-evaluation-through-intelliq-u-platform-partnership-to-support-university-startups/",blurb:"A new tool gives IU Ventures standardized frameworks to assess IU-linked startups more efficiently — strengthening the investment pipeline from Hoosier Angels to the Founders & Funders Summit."},
+  {date:"2026-06-12",source:"Inside INdiana Business",title:"IU Kelley student grows a supplement brand on in-person connections",url:"https://www.insideindianabusiness.com/articles/iu-student-entrepreneur-leverages-in-person-connection-to-help-build-supplement-brand",blurb:"A Kelley student-entrepreneur builds traction through face-to-face networking — a look at how IU turns coursework into companies."},
+  {date:"2026-06-08",source:"IU News",title:"Kelley grad wins $25K Clapp IDEA prize, pitches at Founders & Funders Summit",url:"https://news.iu.edu/live/news/51244-kelley-graduate-pitches-her-phone-accessory",blurb:"PilliPop raised $26K+ via IU Innovates and the JCEI's Clapp IDEA Competition, then pitched alongside a Broadcast.com co-founder in Bloomington."},
+  {date:"2026-05-20",source:"IU News",title:"JagStart pitch competition crowns a student workwear startup",url:"https://news.iu.edu/live/news/51022-jagstart-winner-pursues-entrepreneurial-dreams",blurb:"At IU Indianapolis, a Kelley sophomore won the IU Innovates JagStart competition — eight weeks of training, mentorship and seed funding."}
+ ],
+ berkeley:[
+  {date:"2026-06-23",source:"AccessNewsWire / Berkeley SkyDeck",title:"Berkeley SkyDeck portfolio tops $3B raised — honors semiconductor pioneer for building Cal's founder culture",url:"https://www.accessnewswire.com/newsroom/en/publishing-and-media/berkeley-skydeck-honors-alberto-sangiovanni-vincentelli-semiconductor-pioneer-1178195",blurb:"SkyDeck announces its portfolio has raised $3B+ cumulatively, with 980 advisors and a 613K+ alumni network — the numbers behind Berkeley's #1 VC-founder-factory ranking."},
+  {date:"2026-05-12",source:"Berkeley SCET",title:"Collider Cup XVIII sends four teams to SkyDeck's Pad-13",url:"https://scet.berkeley.edu/collider-cup-xviii-winners-announced-with-three-teams-advancing-to-pad-13/",blurb:"SCET's flagship showcase capped a semester of startup courses (AI ventures, sports tech, food) and fast-tracked four student teams into Berkeley SkyDeck."},
+  {date:"2026-04-24",source:"Berkeley SCET",title:"Transfer student's startup Wrodium wins SkyDeck's Most Innovative Technology",url:"https://scet.berkeley.edu/meet-leanid-palkhouski-the-entrepreneur-solving-knowledge-decay/",blurb:"A junior transfer built an AI 'knowledge freshness' platform through SCET and Berkeley SkyDeck — proof the ecosystem is open to newcomers."},
+  {date:"2026-04-10",source:"Berkeley SCET",title:"MOFarm becomes first Berkeley team to place at the ACC InVenture Prize",url:"https://scet.berkeley.edu/mofarm-the-acc-inventure-prizewinners-turning-farts-into-fuel/",blurb:"A methane-capture startup born in an SCET Challenge Lab won $10K nationally after moving through Collider Cup and SkyDeck's Pad-13."}
+ ],
+ umich:[
+  {date:"2026-06-03",source:"The Michigan Daily",title:"LSA student launches the fashion magazine 'Ouéton'",url:"https://www.michigandaily.com/news/campus-life/umich-communications-student-launches-fashion-magazine-oueton/",blurb:"A student-built print magazine backed by the Barger Leadership Institute — a glimpse of Michigan's broad creative-venture culture."},
+  {date:"2026-05-27",source:"Michigan Ross",title:"Ross spotlights student ventures at Impact Venture Demo Day + SF Innovation Conference",url:"https://rossweb.bus.umich.edu/faculty-staff-blog/2026/05/27/may-2026-message-from-the-dean/",blurb:"Ross showcased student startups at home and convened alumni founders in San Francisco — and previewed a new Michigan Ross LA campus."},
+  {date:"2026-05-18",source:"The Michigan Daily",title:"Ross seniors launch the Care Kits Project nonprofit",url:"https://www.michigandaily.com/news/campus-life/introducing-the-care-kits-project-a-new-student-led-nonprofit/",blurb:"Founders credit Ross resources — the Zell Lurie Institute and the Impact Fund — for turning coursework into a scalable venture."}
+ ]
+};
+
+/* ============ HELPERS ============ */
+const $=(s,e=document)=>e.querySelector(s);
+function verdictColor(f){if(f>=90)return["#1d6b46","#dff0e6"];if(f>=85)return["#2E7D55","#e1f0e7"];if(f>=80)return["#8a6d1f","#f3e8c9"];if(f>=75)return["#9c6322","#f7e8d6"];return["#8a5a2a","#f1e4d3"];}
+function verdictLabel(f){if(f>=90)return"Elite for builders";if(f>=85)return"Excellent fit";if(f>=80)return"Strong fit";if(f>=75)return"Solid fit";return"Situational fit";}
+function ring(f,size=58,sw=6){const r=(size-sw)/2,c=2*Math.PI*r,off=c*(1-f/100),[col]=verdictColor(f);
+ return `<svg class="ring" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="var(--line)" stroke-width="${sw}"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${col}" stroke-width="${sw}" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${off}" transform="rotate(-90 ${size/2} ${size/2})"/><text x="50%" y="50%" text-anchor="middle" dy="0.35em" font-family="Fraunces,serif" font-weight="600" font-size="${size*0.32}" fill="var(--ink)">${f}</text></svg>`;}
+const cyctag=c=>c==="ok"?'<span class="cyc ok">Confirmed 2026–27</span>':'<span class="cyc prior">Prior cycle · verify Aug 1</span>';
+function fmtDate(iso){const d=new Date(iso+"T00:00:00");return isNaN(d)?iso:d.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});}
+function allNews(){let a=[];for(const k in NEWS){(NEWS[k]||[]).forEach(it=>a.push(Object.assign({sid:k},it)));}return a.sort((x,y)=>(y.date||"").localeCompare(x.date||""));}
+
+/* ============ HUB ============ */
+let sortKey="fit",viewMode="cards";
+const UPCOMING=[];
+function sortedSchools(){const a=[...SCHOOLS];
+ if(sortKey==="fit")a.sort((x,y)=>y.fit-x.fit);
+ if(sortKey==="deadline")a.sort((x,y)=>x.dlSort-y.dlSort);
+ if(sortKey==="selective")a.sort((x,y)=>x.rateNum-y.rateNum);
+ if(sortKey==="az")a.sort((x,y)=>x.short.localeCompare(y.short));
+ return a;}
+function renderHub(){
+ const list=sortedSchools();
+ let body=list.map(s=>{const[vc,vb]=verdictColor(s.fit);const d=s.deadlines[0];
+  return `<article class="scard" style="--ac:${s.ac};--ac2:${s.ac2}" onclick="go('${s.id}')">
+   <div class="topbar-accent"></div>
+   <div class="scard-body">
+    <div class="scard-head"><div><h3>${s.name}</h3><div class="loc">◍ ${s.city}, ${s.state} · ${s.type}</div></div>${ring(s.fit)}</div>
+    <span class="verdict-chip" style="background:${vb};color:${vc}">${s.verdict}</span>
+    <div class="ent">${s.cardEnt||s.entreRank.replace(/—.*/,'')}</div>
+   </div>
+   <div class="scard-foot">
+    <div class="kv"><span class="k">Next deadline</span><span class="v amberv">${d.plan.split(' (')[0]} · ${d.date}</span></div>
+    <span class="badge-sel">${s.selectivity.rate} · ${s.selectivity.tier}</span>
+   </div></article>`;}).join("");
+ const table=`<div class="tablewrap"><table class="cmp">
+  <thead><tr>
+   <th onclick="setSort('az')">School</th><th onclick="setSort('fit')">Fit ▾</th>
+   <th>Entrepreneurship signal</th><th onclick="setSort('selective')">Selectivity</th>
+   <th onclick="setSort('deadline')">Earliest deadline</th><th>Test policy</th><th>Sticker / yr</th>
+  </tr></thead><tbody>${list.map(s=>`<tr onclick="go('${s.id}')">
+   <td><span class="sname"><span class="swatch" style="background:${s.ac}"></span>${s.name}</span></td>
+   <td><span class="fitnum">${s.fit}</span> · ${s.verdict}</td>
+   <td>${s.entreRank.replace(/—.*/,'')}</td>
+   <td>${s.selectivity.rate} <span style="color:var(--muted)">${s.selectivity.tier}</span></td>
+   <td>${s.deadlines[0].plan.split(' (')[0]} ${s.deadlines[0].date}</td>
+   <td>${s.testPolicy}</td>
+   <td>${s.cost.mode==='private'?s.cost.sticker:(s.cost.outState||s.cost.sticker)}</td>
+  </tr>`).join("")}</tbody></table></div>`;
+ const newsHub=allNews().slice(0,8).map(it=>{const s=SCHOOLS.find(x=>x.id===it.sid)||{ac:"#999",short:"—"};return `<a class="ncard" href="${it.url}" target="_blank" rel="noopener noreferrer" style="--ac:${s.ac}"><div class="nctop"><span class="nswatch" style="background:${s.ac}"></span>${s.short}<span class="ndate">${fmtDate(it.date)}</span></div><div class="ntitle">${it.title}</div><div class="nblurb">${it.blurb}</div><div class="nsrc">${it.source} ↗</div></a>`;}).join("");
+ $("#hub").innerHTML=`
+ <div class="wrap">
+  <section class="hero">
+   <div class="eyebrow">Undergraduate entrepreneurship · ${META.cycle}</div>
+   <h1 class="serif">Where the <em>founders</em> get made.</h1>
+   <p class="lede">A working atlas of twelve universities, scored on what actually matters if you want to build companies as an undergrad — the program, the money, the network, the ecosystem. Click any school for the full picture: strengths, the entrepreneurship engine, admissions, every application question, cost, and an honest fit verdict.</p>
+   <div class="meta-row">
+    <span class="pill"><span class="ic">◆</span> 12 schools · ${SCHOOLS.length} live</span>
+    <span class="pill"><span class="ic">◆</span> Entrepreneurship-weighted fit scores</span>
+    <span class="pill"><span class="ic">◆</span> Verbatim 2026–27 application questions</span>
+    <span class="pill"><span class="ic">◆</span> Live news daily · data weekly</span>
+   </div>
+  </section>
+  <div class="controls">
+   <div class="ctrl-group"><span class="ctrl-label">Sort</span>
+    <div class="seg" id="sortseg">
+     <button data-k="fit" class="on" onclick="setSort('fit')">Fit score</button>
+     <button data-k="deadline" onclick="setSort('deadline')">Deadline</button>
+     <button data-k="selective" onclick="setSort('selective')">Selectivity</button>
+     <button data-k="az" onclick="setSort('az')">A–Z</button>
+    </div></div>
+   <div class="spacer"></div>
+   <div class="ctrl-group"><span class="ctrl-label">View</span>
+    <div class="seg" id="viewseg">
+     <button data-v="cards" class="on" onclick="setView('cards')">Cards</button>
+     <button data-v="table" onclick="setView('table')">Compare</button>
+    </div></div>
+  </div>
+  ${viewMode==="cards"?`<div class="grid">${body}</div>`:table}
+  <section style="padding:6px 0 8px;border-top:1px solid var(--line-2);margin-top:18px">
+   <div class="sec-h" style="margin:14px 0 16px"><span class="n serif">✦</span><h2 class="serif" style="font-size:26px">Latest across your schools</h2><span style="margin-left:auto;font-size:12px;color:var(--muted);font-weight:600">↻ refreshed daily · ${META.newsUpdated}</span></div>
+   <div class="newsfeed">${newsHub}</div>
+  </section>
+
+  ${UPCOMING.length?`<div class="rollout">
+   <h4 class="serif">Rolling out soon</h4>
+   <p>More schools are being added to this same dashboard. Same link — it just fills in.</p>
+   <div class="chips">${UPCOMING.map(n=>`<span class="chip-soon">${n}</span>`).join("")}</div>
+  </div>`:`<div class="rollout" style="text-align:center;border-style:solid;background:var(--card)">
+   <h4 class="serif">All 12 schools are live ✦</h4>
+   <p style="margin-bottom:0">Every school below is fully built — strengths, the entrepreneurship engine, admissions, application questions, cost and a fit verdict — with news refreshed daily and data verified weekly.</p>
+  </div>`}
+  <details class="method" id="method">
+   <summary><span style="color:var(--gold)">✦</span> How fit is scored &amp; how to read the data <span class="plus">+</span></summary>
+   <div class="method-body">
+    <p>Every school gets an <b>Entrepreneurship Fit Score (0–100)</b> — a weighted, profile-agnostic judgment of how strong a launchpad it is for an undergraduate who wants to build companies. It is <b>not</b> an admissions-chance estimate.</p>
+    <h5>The four weighted dimensions</h5>
+    <div class="wbar"><span class="wlab">Program depth</span><span class="wtrack"><span class="wfill" style="width:35%"></span></span><span class="wpct">35%</span></div>
+    <div class="wbar"><span class="wlab">Experiential &amp; funding ecosystem</span><span class="wtrack"><span class="wfill" style="width:30%"></span></span><span class="wpct">30%</span></div>
+    <div class="wbar"><span class="wlab">Founder outcomes &amp; network</span><span class="wtrack"><span class="wfill" style="width:20%"></span></span><span class="wpct">20%</span></div>
+    <div class="wbar"><span class="wlab">Ecosystem / location advantage</span><span class="wtrack"><span class="wfill" style="width:15%"></span></span><span class="wpct">15%</span></div>
+    <h5>Data freshness tags</h5>
+    <div class="tag-legend"><span>${cyctag('ok')} posted by the school for the upcoming cycle</span><span>${cyctag('prior')} most recent known version; 2026–27 not yet released</span></div>
+    <h5>Make it personal</h5>
+    <p>Fit here is about program quality, not your odds. Share a student profile — intended major, GPA, test scores, home state, budget — and these convert into true <b>Reach / Target / Likely</b> calls per school.</p>
+   </div>
+  </details>
+ </div>`;
+}
+function setSort(k){sortKey=k;renderHub();const seg=$("#sortseg");if(seg)[...seg.children].forEach(b=>b.classList.toggle("on",b.dataset.k===k));}
+function setView(v){viewMode=v;renderHub();const seg=$("#viewseg");if(seg)[...seg.children].forEach(b=>b.classList.toggle("on",b.dataset.v===v));}
+
+/* ============ DETAIL ============ */
+function renderDetail(s){
+ const[vc,vb]=verdictColor(s.fit);
+ const idx=SCHOOLS.findIndex(x=>x.id===s.id);
+ const prev=SCHOOLS[(idx-1+SCHOOLS.length)%SCHOOLS.length],next=SCHOOLS[(idx+1)%SCHOOLS.length];
+ const dims=[["Program depth","program"],["Experiential & funding","experiential"],["Outcomes & network","outcomes"],["Ecosystem / location","location"]];
+ const sup=s.supplements||[];
+ const news=NEWS[s.id]||[];
+ $("#detail").innerHTML=`
+ <header class="dhead" style="--ac:${s.ac};--ac2:${s.ac2}">
+  <div class="dhead-bg"></div><div class="dhead-mono serif">${s.mono}</div>
+  <div class="dhead-in">
+   <div><div class="kicker">${s.type} · ${s.platform}</div>
+    <h1 class="serif">${s.name}</h1>
+    <div class="dmeta"><span>◍ ${s.city}, ${s.state}</span><span>❖ ${s.setting}</span><span>♟ ${s.undergrad} undergrads</span></div>
+   </div>
+   <div class="dhead-fit">${ring(s.fit,84,7)}<div class="vlabel">${s.verdict}</div><div class="vsub">Entrepreneurship fit</div></div>
+  </div>
+ </header>
+ <nav class="subnav"><div class="subnav-in" id="subnav">
+  <a href="#sec-over" class="on">Overview</a><a href="#sec-news">News</a><a href="#sec-ent">Entrepreneurship</a><a href="#sec-adm">Admissions</a><a href="#sec-app">Application questions</a><a href="#sec-cost">Cost &amp; aid</a><a href="#sec-fit">Fit verdict</a>
+ </div></nav>
+ <div class="wrap">
+  <section class="sec" id="sec-over"><div class="sec-h"><span class="n serif">01</span><h2 class="serif">Overview</h2></div>
+   <p class="intro big">${s.entreHeadline}</p>
+   <div class="cols"><div class="block"><h4>Why it earns a place</h4><ul class="ul">${s.strengths.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+    <div class="block"><h4>Snapshot</h4><ul class="ul">
+     <li><b>Type</b> — ${s.type}, ${s.setting}</li><li><b>Undergraduates</b> — ${s.undergrad}</li>
+     <li><b>Applies via</b> — ${s.platform}</li><li><b>Selectivity</b> — ${s.selectivity.rate} (${s.selectivity.tier})</li>
+     <li><b>Entrepreneurship ranking</b> — ${s.entreRank}</li></ul></div></div>
+  </section>
+
+  <section class="sec" id="sec-news"><div class="sec-h"><span class="n serif">02</span><h2 class="serif">In the news</h2><span style="margin-left:auto;font-size:12px;color:var(--muted);font-weight:600">↻ updated daily</span></div>
+   ${news.length?`<div class="newslist">${news.map(it=>`<a class="nrow" href="${it.url}" target="_blank" rel="noopener noreferrer"><div class="nrdate">${fmtDate(it.date)}</div><div class="nrbody"><div class="ntitle">${it.title}</div><div class="nblurb">${it.blurb}</div><div class="nsrc">${it.source} ↗</div></div></a>`).join("")}</div>`:`<p class="intro">No items logged in the latest refresh — the daily scout will populate this section.</p>`}
+  </section>
+
+  <section class="sec" id="sec-ent"><div class="sec-h"><span class="n serif">03</span><h2 class="serif">The entrepreneurship engine</h2></div>
+   <div class="ent-banner"><div class="rank">${s.entreRank}</div><p>${s.entreHeadline}</p></div>
+   <div class="subhead">Programs &amp; centers</div>
+   <div class="pgrid">${s.programs.map(p=>`<div class="pcard"><div class="pt"><span class="d"></span>${p.t}</div><div class="pd">${p.d}</div></div>`).join("")}</div>
+   <div class="subhead">Funding, competitions &amp; capital</div>
+   <div class="pgrid">${s.funding.map(p=>`<div class="pcard"><div class="pt"><span class="d"></span>${p.t}</div><div class="pd">${p.d}</div></div>`).join("")}</div>
+   <div class="cols" style="margin-top:22px"><div class="block"><h4>Degree pathways</h4><p style="font-size:14.5px;color:var(--ink-soft)">${s.degrees}</p></div>
+    <div class="block"><h4>Founders &amp; network</h4><p style="font-size:14.5px;color:var(--ink-soft)">${s.founders}</p></div></div>
+  </section>
+
+  <section class="sec" id="sec-adm"><div class="sec-h"><span class="n serif">04</span><h2 class="serif">Admissions</h2></div>
+   <div class="tiles">
+    <div class="tile"><div class="tl">Acceptance rate</div><div class="tv">${s.selectivity.rate}</div><div class="tn">${s.selectivity.tier}</div></div>
+    <div class="tile"><div class="tl">Testing</div><div class="tv" style="font-size:21px">${s.testPolicy}</div><div class="tn">${s.sat!=="—"?`SAT ${s.sat} · ACT ${s.act}`:"Not considered"}</div></div>
+    <div class="tile"><div class="tl">Application fee</div><div class="tv">${s.fee}</div><div class="tn">Waivers available</div></div>
+    <div class="tile"><div class="tl">Recommendations</div><div class="tv" style="font-size:18px">${s.recs}</div></div>
+   </div>
+   <div class="subhead">Key dates — application opens ${s.opens}</div>
+   <div class="block"><div class="timeline">${s.deadlines.map(d=>`<div class="tlrow"><div class="tldate serif">${d.date}</div><div class="tlmid"><div class="tp">${d.plan}</div><div class="tnote">${d.note}</div></div>${cyctag(d.cycle)}</div>`).join("")}</div></div>
+   <p class="tnote" style="font-size:12.5px;color:var(--muted);margin-top:12px">${s.selectivity.note}</p>
+  </section>
+
+  <section class="sec" id="sec-app"><div class="sec-h"><span class="n serif">05</span><h2 class="serif">Application questions</h2></div>
+   <div class="essay-note"><span class="ic">✎</span><div>${s.appNote}</div></div>
+   ${s.optIntro?`<p class="opt-intro">${s.optIntro}</p>`:""}
+   ${sup.map(q=>`<details class="acc"><summary><div class="qmeta"><div class="qt">${q.title}</div><div class="qsub"><span class="req ${q.req==='Required'?'r':'o'}">${q.req}</span>${q.words}${cyctag(q.cycle)}</div></div><span class="exp">+</span></summary><div class="acc-body"><div class="ptext">${q.text}</div></div></details>`).join("")}
+  </section>
+
+  <section class="sec" id="sec-cost"><div class="sec-h"><span class="n serif">06</span><h2 class="serif">Cost &amp; aid</h2></div>
+   <div class="tiles">${s.cost.mode==="private"
+     ?`<div class="tile"><div class="tl">Sticker cost of attendance</div><div class="tv">${s.cost.sticker}</div><div class="tn">Before aid · 2025-26</div></div>`
+     :`<div class="tile"><div class="tl">In-state</div><div class="tv">${s.cost.inState}</div><div class="tn">Total COA / yr</div></div><div class="tile"><div class="tl">Out-of-state</div><div class="tv">${s.cost.outState}</div><div class="tn">Total COA / yr</div></div>`}
+   </div>
+   <div class="block"><h4>Financial aid</h4><p style="font-size:14.5px;color:var(--ink-soft)">${s.cost.aid}</p></div>
+  </section>
+
+  <section class="sec" id="sec-fit" style="border-bottom:none"><div class="sec-h"><span class="n serif">07</span><h2 class="serif">Fit verdict</h2></div>
+   <div class="fit-wrap">
+    <div class="fit-score-card">${ring(s.fit,120,9)}<div class="bigv" style="color:${vc}">${s.verdict}</div><div class="bigsub">Entrepreneurship Fit Score</div></div>
+    <div class="bars">${dims.map(([lab,key])=>`<div class="bar"><div class="blab"><span>${lab}</span><span class="bn">${s.sub[key]}/10</span></div><div class="btrack"><div class="bfill" style="width:${s.sub[key]*10}%"></div></div></div>`).join("")}</div>
+   </div>
+   <div class="callout">
+    <div class="block" style="border-left:3px solid var(--green)"><h4 style="color:var(--green)">✓ Best for</h4><p style="font-size:14.5px;color:var(--ink-soft)">${s.bestFor}</p></div>
+    <div class="block" style="border-left:3px solid var(--amber)"><h4 style="color:var(--amber)">! Watch-outs</h4><ul class="ul warn">${s.watch.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+   </div>
+  </section>
+
+  <div class="dfoot"><div class="src"><b>Sources &amp; freshness.</b> ${s.src} Last verified ${META.updated}; auto-refreshed weekly.</div>
+   <div class="navswitch"><button onclick="go('${prev.id}')">← ${prev.short}</button><button onclick="go('${next.id}')">${next.short} →</button></div>
+  </div>
+ </div>`;
+ setupSubnav();
+}
+function setupSubnav(){const links=[...document.querySelectorAll('#subnav a')];const secs=links.map(l=>$(l.getAttribute('href')));
+ const ob=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const id='#'+e.target.id;links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')===id));}});},{rootMargin:"-30% 0px -60% 0px"});
+ secs.forEach(s=>s&&ob.observe(s));}
+
+/* ============ ROUTER ============ */
+function go(id){location.hash=id?("/"+id):"/";}
+function route(){const h=location.hash.replace(/^#\/?/,"");const s=SCHOOLS.find(x=>x.id===h);
+ if(s){document.body.classList.add("detail");renderDetail(s);$("#hub").classList.remove("active");$("#detail").classList.add("active");}
+ else{document.body.classList.remove("detail");renderHub();$("#detail").classList.remove("active");$("#hub").classList.add("active");}
+ window.scrollTo({top:0,behavior:"instant"in window?"instant":"auto"});}
+window.addEventListener("hashchange",route);
+route();
+</script>
+</body>
+</html>
