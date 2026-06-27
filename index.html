@@ -272,14 +272,14 @@ table.cmp .swatch{width:10px;height:10px;border-radius:3px;flex-shrink:0}
     <button class="tb-btn tb-back" onclick="go('')">← All schools</button>
     <div class="topbar-spacer"></div>
     <div class="fresh tb-home-only"><span class="dot"></span> News daily · data weekly · 26 Jun</div>
-    <button class="tb-btn tb-home-only" onclick="document.getElementById('method').open=true;document.getElementById('method').scrollIntoView({behavior:'smooth'})">Methodology</button>
+    <button class="tb-btn tb-home-only" onclick="document.getElementById('method').open=true;document.getElementById('method').scrollIntoView({behavior:'smooth'})">How to read this</button>
   </div>
 </div>
 
 <div id="hub" class="view"></div>
 <div id="detail" class="view"></div>
 
-<div class="sitefoot">Founder's Compass · An advisory tool for prospective undergraduates · Fit scores are entrepreneurship-weighted judgments, not admissions predictions.</div>
+<div class="sitefoot">Founder's Compass · An advisory tool for prospective undergraduates · Fit verdicts are a counselor's judgment, not admissions predictions.</div>
 
 <script>
 /* ============ DATA ============ */
@@ -956,7 +956,7 @@ function renderHub(){
   return `<article class="scard" style="--ac:${s.ac};--ac2:${s.ac2}" onclick="go('${s.id}')">
    <div class="topbar-accent"></div>
    <div class="scard-body">
-    <div class="scard-head"><div><h3>${s.name}</h3><div class="loc">◍ ${s.city}, ${s.state} · ${s.type}</div></div>${ring(s.fit)}</div>
+    <div class="scard-head"><div><h3>${s.name}</h3><div class="loc">◍ ${s.city}, ${s.state} · ${s.type}</div></div></div>
     <span class="verdict-chip" style="background:${vb};color:${vc}">${s.verdict}</span>
     <div class="ent">${s.cardEnt||s.entreRank.replace(/—.*/,'')}</div>
    </div>
@@ -966,12 +966,12 @@ function renderHub(){
    </div></article>`;}).join("");
  const table=`<div class="tablewrap"><table class="cmp">
   <thead><tr>
-   <th onclick="setSort('az')">School</th><th onclick="setSort('fit')">Fit ▾</th>
+   <th onclick="setSort('az')">School</th><th onclick="setSort('fit')">Fit verdict</th>
    <th>Entrepreneurship signal</th><th onclick="setSort('selective')">Selectivity</th>
    <th onclick="setSort('deadline')">Earliest deadline</th><th>Test policy</th><th>Sticker / yr</th>
   </tr></thead><tbody>${list.map(s=>`<tr onclick="go('${s.id}')">
    <td><span class="sname"><span class="swatch" style="background:${s.ac}"></span>${s.name}</span></td>
-   <td><span class="fitnum">${s.fit}</span> · ${s.verdict}</td>
+   <td><strong>${s.verdict}</strong></td>
    <td>${s.entreRank.replace(/—.*/,'')}</td>
    <td>${s.selectivity.rate} <span style="color:var(--muted)">${s.selectivity.tier}</span></td>
    <td>${s.deadlines[0].plan.split(' (')[0]} ${s.deadlines[0].date}</td>
@@ -984,10 +984,10 @@ function renderHub(){
   <section class="hero">
    <div class="eyebrow">Undergraduate entrepreneurship · ${META.cycle}</div>
    <h1 class="serif">Where the <em>founders</em> get made.</h1>
-   <p class="lede">A working atlas of twelve universities, scored on what actually matters if you want to build companies as an undergrad — the program, the money, the network, the ecosystem. Click any school for the full picture: strengths, the entrepreneurship engine, admissions, every application question, cost, and an honest fit verdict.</p>
+   <p class="lede">A working atlas of twelve universities, judged on what actually matters if you want to build companies as an undergrad — the program, the money, the network, the ecosystem. Click any school for the full picture: strengths, the entrepreneurship engine, admissions, every application question, cost, and an honest fit verdict.</p>
    <div class="meta-row">
     <span class="pill"><span class="ic">◆</span> 12 schools · ${SCHOOLS.length} live</span>
-    <span class="pill"><span class="ic">◆</span> Entrepreneurship-weighted fit scores</span>
+    <span class="pill"><span class="ic">◆</span> Honest fit verdicts per school</span>
     <span class="pill"><span class="ic">◆</span> Verbatim 2026–27 application questions</span>
     <span class="pill"><span class="ic">◆</span> Live news daily · data weekly</span>
    </div>
@@ -995,7 +995,7 @@ function renderHub(){
   <div class="controls">
    <div class="ctrl-group"><span class="ctrl-label">Sort</span>
     <div class="seg" id="sortseg">
-     <button data-k="fit" class="on" onclick="setSort('fit')">Fit score</button>
+     <button data-k="fit" class="on" onclick="setSort('fit')">Best fit</button>
      <button data-k="deadline" onclick="setSort('deadline')">Deadline</button>
      <button data-k="selective" onclick="setSort('selective')">Selectivity</button>
      <button data-k="az" onclick="setSort('az')">A–Z</button>
@@ -1022,18 +1022,13 @@ function renderHub(){
    <p style="margin-bottom:0">Every school below is fully built — strengths, the entrepreneurship engine, admissions, application questions, cost and a fit verdict — with news refreshed daily and data verified weekly.</p>
   </div>`}
   <details class="method" id="method">
-   <summary><span style="color:var(--gold)">✦</span> How fit is scored &amp; how to read the data <span class="plus">+</span></summary>
+   <summary><span style="color:var(--gold)">✦</span> How to read this &amp; data freshness <span class="plus">+</span></summary>
    <div class="method-body">
-    <p>Every school gets an <b>Entrepreneurship Fit Score (0–100)</b> — a weighted, profile-agnostic judgment of how strong a launchpad it is for an undergraduate who wants to build companies. It is <b>not</b> an admissions-chance estimate.</p>
-    <h5>The four weighted dimensions</h5>
-    <div class="wbar"><span class="wlab">Program depth</span><span class="wtrack"><span class="wfill" style="width:35%"></span></span><span class="wpct">35%</span></div>
-    <div class="wbar"><span class="wlab">Experiential &amp; funding ecosystem</span><span class="wtrack"><span class="wfill" style="width:30%"></span></span><span class="wpct">30%</span></div>
-    <div class="wbar"><span class="wlab">Founder outcomes &amp; network</span><span class="wtrack"><span class="wfill" style="width:20%"></span></span><span class="wpct">20%</span></div>
-    <div class="wbar"><span class="wlab">Ecosystem / location advantage</span><span class="wtrack"><span class="wfill" style="width:15%"></span></span><span class="wpct">15%</span></div>
-    <h5>Data freshness tags</h5>
+    <p>Each school carries a counselor's <b>fit verdict</b> for an entrepreneurship-focused undergraduate — an honest read on how strong a launchpad it is to build companies, considering the program, the experiential and funding ecosystem, founder outcomes and network, and location. It is <b>not</b> an admissions-chance estimate.</p>
+    <h5>Data freshness</h5>
     <div class="tag-legend"><span>${cyctag('ok')} posted by the school for the upcoming cycle</span><span>${cyctag('prior')} most recent known version; 2026–27 not yet released</span></div>
     <h5>Make it personal</h5>
-    <p>Fit here is about program quality, not your odds. Share a student profile — intended major, GPA, test scores, home state, budget — and these convert into true <b>Reach / Target / Likely</b> calls per school.</p>
+    <p>These verdicts are about program quality, not your odds. Share a student profile — intended major, GPA, test scores, home state, budget — and we can turn them into true <b>Reach / Target / Likely</b> calls per school.</p>
    </div>
   </details>
  </div>`;
@@ -1046,7 +1041,6 @@ function renderDetail(s){
  const[vc,vb]=verdictColor(s.fit);
  const idx=SCHOOLS.findIndex(x=>x.id===s.id);
  const prev=SCHOOLS[(idx-1+SCHOOLS.length)%SCHOOLS.length],next=SCHOOLS[(idx+1)%SCHOOLS.length];
- const dims=[["Program depth","program"],["Experiential & funding","experiential"],["Outcomes & network","outcomes"],["Ecosystem / location","location"]];
  const sup=s.supplements||[];
  const news=NEWS[s.id]||[];
  const essays=ESSAYS[s.id]||[];
@@ -1058,7 +1052,7 @@ function renderDetail(s){
     <h1 class="serif">${s.name}</h1>
     <div class="dmeta"><span>◍ ${s.city}, ${s.state}</span><span>❖ ${s.setting}</span><span>♟ ${s.undergrad} undergrads</span></div>
    </div>
-   <div class="dhead-fit">${ring(s.fit,84,7)}<div class="vlabel">${s.verdict}</div><div class="vsub">Entrepreneurship fit</div></div>
+   <div class="dhead-fit"><div class="vlabel">${s.verdict}</div><div class="vsub">Fit for entrepreneurs</div></div>
   </div>
  </header>
  <nav class="subnav"><div class="subnav-in" id="subnav">
@@ -1116,10 +1110,7 @@ function renderDetail(s){
   </section>
 
   <section class="sec" id="sec-fit" style="border-bottom:none"><div class="sec-h"><span class="n serif">07</span><h2 class="serif">Fit verdict</h2></div>
-   <div class="fit-wrap">
-    <div class="fit-score-card">${ring(s.fit,120,9)}<div class="bigv" style="color:${vc}">${s.verdict}</div><div class="bigsub">Entrepreneurship Fit Score</div></div>
-    <div class="bars">${dims.map(([lab,key])=>`<div class="bar"><div class="blab"><span>${lab}</span><span class="bn">${s.sub[key]}/10</span></div><div class="btrack"><div class="bfill" style="width:${s.sub[key]*10}%"></div></div></div>`).join("")}</div>
-   </div>
+   <p class="intro big">Counselor's read: <strong style="color:${vc}">${s.verdict}</strong> for an entrepreneurship-focused undergraduate. Here's who it's best for — and what to weigh.</p>
    <div class="callout">
     <div class="block" style="border-left:3px solid var(--green)"><h4 style="color:var(--green)">✓ Best for</h4><p style="font-size:14.5px;color:var(--ink-soft)">${s.bestFor}</p></div>
     <div class="block" style="border-left:3px solid var(--amber)"><h4 style="color:var(--amber)">! Watch-outs</h4><ul class="ul warn">${s.watch.map(x=>`<li>${x}</li>`).join("")}</ul></div>
