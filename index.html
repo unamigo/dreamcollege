@@ -962,7 +962,7 @@ function renderHub(){
    </div>
    <div class="scard-foot">
     <div class="kv"><span class="k">Next deadline</span><span class="v amberv">${d.plan.split(' (')[0]} · ${d.date}</span></div>
-    <span class="badge-sel">${s.selectivity.rate} · ${s.selectivity.tier}</span>
+    <span class="kv" style="text-align:right"><span class="k">Applies via</span><span class="v" style="font-weight:600">${s.platform}</span></span>
    </div></article>`;}).join("");
  const table=`<div class="tablewrap"><table class="cmp">
   <thead><tr>
