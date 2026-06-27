@@ -985,12 +985,6 @@ function renderHub(){
    <div class="eyebrow">Undergraduate entrepreneurship · ${META.cycle}</div>
    <h1 class="serif">Where the <em>founders</em> get made.</h1>
    <p class="lede">A working atlas of twelve universities, judged on what actually matters if you want to build companies as an undergrad — the program, the money, the network, the ecosystem. Click any school for the full picture: strengths, the entrepreneurship engine, admissions, every application question, cost, and an honest fit verdict.</p>
-   <div class="meta-row">
-    <span class="pill"><span class="ic">◆</span> 12 schools · ${SCHOOLS.length} live</span>
-    <span class="pill"><span class="ic">◆</span> Honest fit verdicts per school</span>
-    <span class="pill"><span class="ic">◆</span> Verbatim 2026–27 application questions</span>
-    <span class="pill"><span class="ic">◆</span> Live news daily · data weekly</span>
-   </div>
   </section>
   <div class="controls">
    <div class="ctrl-group"><span class="ctrl-label">Sort</span>
@@ -1017,10 +1011,7 @@ function renderHub(){
    <h4 class="serif">Rolling out soon</h4>
    <p>More schools are being added to this same dashboard. Same link — it just fills in.</p>
    <div class="chips">${UPCOMING.map(n=>`<span class="chip-soon">${n}</span>`).join("")}</div>
-  </div>`:`<div class="rollout" style="text-align:center;border-style:solid;background:var(--card)">
-   <h4 class="serif">All 12 schools are live ✦</h4>
-   <p style="margin-bottom:0">Every school below is fully built — strengths, the entrepreneurship engine, admissions, application questions, cost and a fit verdict — with news refreshed daily and data verified weekly.</p>
-  </div>`}
+  </div>`:``}
   <details class="method" id="method">
    <summary><span style="color:var(--gold)">✦</span> How to read this &amp; data freshness <span class="plus">+</span></summary>
    <div class="method-body">
