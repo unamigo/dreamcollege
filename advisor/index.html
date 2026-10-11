@@ -498,29 +498,56 @@ async function reask(i,model){
   c.msgs.splice(i+1,0,ai); save(); renderMsgs();
   await stream(c,ai,historyFor(c,u+1),"",true);
 }
+async function readStream(r,ai,paint){
+  const res={sawData:false,raw:"",finish:"",err:"",reasoning:0};
+  const reader=r.body.getReader(); const dec=new TextDecoder(); let buf=""; let last=0;
+  const handle=(j)=>{
+    if(j.error){res.err=(j.error.message||JSON.stringify(j.error)); return}
+    const ch=j.choices&&j.choices[0]; if(!ch)return;
+    if(ch.finish_reason)res.finish=ch.finish_reason;
+    const d=ch.delta||ch.message||{};
+    let t=d.content; if(Array.isArray(t))t=t.map(x=>typeof x==="string"?x:(x&&x.text)||"").join("");
+    if(typeof t==="string"&&t){ai.content+=t; ai.status=""}
+    const rz=d.reasoning||(Array.isArray(d.reasoning_details)?d.reasoning_details.map(x=>x.text||x.summary||"").join(""):"");
+    if(rz){res.reasoning+=rz.length; if(!ai.content)ai.status="Thinking…"}
+  };
+  while(true){
+    const {done,value}=await reader.read(); if(done)break;
+    const chunk=dec.decode(value,{stream:true}); if(res.raw.length<4000)res.raw+=chunk; buf+=chunk;
+    let nl; while((nl=buf.indexOf("\n"))>=0){
+      const line=buf.slice(0,nl).trim(); buf=buf.slice(nl+1);
+      if(!line.startsWith("data:"))continue; const d=line.slice(5).trim(); if(d==="[DONE]")continue;
+      res.sawData=true; try{handle(JSON.parse(d))}catch(e){}
+    }
+    const now=Date.now(); if(now-last>60){paint();last=now}
+  }
+  if(!res.sawData){ try{handle(JSON.parse(res.raw.trim()))}catch(e){} }
+  if(res.err&&!ai.content)throw new Error("OpenRouter said: "+res.err);
+  paint(); return res;
+}
 async function stream(c,ai,history,mode,isSecond){
   state.busy=true; $("sendBtn").disabled=true; $("stopBtn").style.display="";
   const p=curPrompt(), s=school();
   const promptText=p?`${s.name} — ${p.title} (${p.words}${p.req?", "+p.req:""}): ${p.text}`:"";
   state.ctrl=new AbortController();
   const idx=c.msgs.indexOf(ai);
-  const paint=()=>{const el=$("a"+idx); if(el){el.innerHTML=ai.content?md(ai.content):'<span class="typing"><i></i><i></i><i></i></span>'; const near=$("msgs").scrollHeight-$("msgs").scrollTop-$("msgs").clientHeight<160; if(near)scrollEnd();}};
+  const paint=()=>{const el=$("a"+idx); if(el){el.innerHTML=ai.content?md(ai.content):(ai.status?'<span style="color:var(--muted);font-size:13px">'+esc(ai.status)+'</span> ':'')+'<span class="typing"><i></i><i></i><i></i></span>'; const near=$("msgs").scrollHeight-$("msgs").scrollTop-$("msgs").clientHeight<160; if(near)scrollEnd();}};
   try{
     const payload={code:state.code,model:ai.model,school:s.id==="general"?"":s.id,prompt:promptText,profile:state.profile,mode:(isSecond?"This is a second opinion on the same question; give your own independent take. ":"")+(mode||""),messages:history};
     const r=DIRECT?await DIRECT.send(payload,state.ctrl.signal):await fetch(API,{method:"POST",headers:{"content-type":"application/json"},signal:state.ctrl.signal,body:JSON.stringify(payload)});
     if(!r.ok){let j={};try{j=await r.json()}catch(e){} if(j.error&&typeof j.error==="object")j.error=j.error.message; if(r.status===401){$("gateErr").textContent="OpenRouter rejected the key"+(j.error?": "+j.error:"")+". Paste it again.";$("gate").classList.add("show")} throw new Error(j.error||("Error "+r.status))}
-    const reader=r.body.getReader(); const dec=new TextDecoder(); let buf=""; let last=0;
-    while(true){
-      const {done,value}=await reader.read(); if(done)break;
-      buf+=dec.decode(value,{stream:true});
-      let nl; while((nl=buf.indexOf("\n"))>=0){
-        const line=buf.slice(0,nl).trim(); buf=buf.slice(nl+1);
-        if(!line.startsWith("data:"))continue; const d=line.slice(5).trim(); if(d==="[DONE]")continue;
-        try{const j=JSON.parse(d); if(j.error)throw new Error(j.error.message||"Model error"); const t=j.choices&&j.choices[0]&&j.choices[0].delta&&j.choices[0].delta.content; if(t){ai.content+=t;}}catch(e){if(e.message&&!/JSON/.test(e.message))throw e}
-      }
-      const now=Date.now(); if(now-last>60){paint();last=now}
+    const res=await readStream(r,ai,paint);
+    if(!ai.content&&DIRECT&&!state.ctrl.signal.aborted){ // one automatic retry with a smaller thinking budget
+      ai.status="Retrying…"; paint();
+      const r2=await DIRECT.send({...payload,retry:true},state.ctrl.signal);
+      if(r2.ok){const res2=await readStream(r2,ai,paint); Object.assign(res,res2)}
+      else{let j={};try{j=await r2.json()}catch(e){} throw new Error("OpenRouter error "+r2.status+((j.error&&(j.error.message||j.error))?": "+(j.error.message||j.error):""))}
     }
-    if(!ai.content)throw new Error("The model returned an empty answer. Try again or pick another model.");
+    ai.status="";
+    if(!ai.content){
+      let why=[]; if(res.err)why.push("OpenRouter said: "+res.err); if(res.finish)why.push("finish reason: "+res.finish); if(res.reasoning)why.push("the model spent its budget thinking ("+res.reasoning+" characters) and wrote no answer"); if(!res.sawData)why.push("no streamed data came back"+(res.raw?(": "+res.raw.slice(0,200)):""));
+      throw new Error("The model returned no answer"+(why.length?" ("+why.join("; ")+")":"")+". Try again, or pick a different model in the top right.");
+    }
   }catch(e){
     if(e.name==="AbortError"){ai.content+=(ai.content?"\n\n":"")+"*(stopped)*"}
     else if(DIRECT&&/ISO-8859|headers/i.test(e.message||"")){ai.error=true; ai.content="**The key you entered isn't a complete OpenRouter key.** It contains a character like \u201c\u2026\u201d, which usually means it was copied from OpenRouter's key list, where keys are shortened. Create a new key on openrouter.ai, copy it right away, and paste it here."; $("gateErr").textContent="Paste the full key (it starts with sk-or-v1- and is about 73 characters)."; $("codeIn").value=""; $("gate").classList.add("show")}

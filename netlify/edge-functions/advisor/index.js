@@ -102,8 +102,8 @@ export default async (req) => {
     body: JSON.stringify({
       model,
       stream: true,
-      max_tokens: 3000,
-      temperature: 0.6,
+      max_tokens: 8000,
+      reasoning: { max_tokens: 2000 },
       messages: [systemMsg, ...clean],
     }),
   });
