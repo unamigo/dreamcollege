@@ -327,7 +327,8 @@ function save(){LS.set("convs",state.convs);LS.set("cur",state.cur)}
 function modelLabel(id){const m=MODELS.find(x=>x.id===id);return m?m.label:id}
 
 /* ---------- gate ---------- */
-function cleanKey(v){return String(v||"").replace(/^\s*bearer\s+/i,"").replace(/[\u2010-\u2015\u2212]/g,"-").replace(/[\s\u200B-\u200D\uFEFF\u00A0"'`<>\u2018\u2019\u201C\u201D]/g,"")}
+function cleanKey0(v){return String(v||"").replace(/^\s*bearer\s+/i,"").replace(/[\u2010-\u2015\u2212]/g,"-").replace(/[\s\u200B-\u200D\uFEFF\u00A0"'`<>\u2018\u2019\u201C\u201D]/g,"")}
+function cleanKey(v){let k=cleanKey0(v).replace(/^[^A-Za-z]+(?=sk-or-)/i,""); if(/^sk-or-v1-[0-9a-f]{64}$/i.test(k)) k=k.toLowerCase(); else k=k.replace(/^sk-or-/i,"sk-or-"); return k}
 function keyProblem(k){
   if(/\u2026|\.\.\./.test(k)) return "This is the shortened key OpenRouter shows in its key list (it has \u2026 in the middle). That is not the full key. OpenRouter shows the full key only once, right after you create it. Create a new key on openrouter.ai and copy it straight away.";
   if(/[^\x21-\x7E]/.test(k)) return "The key contains a character that isn't part of an OpenRouter key (often from copying out of a document or message). Copy it again directly from OpenRouter, or create a new key.";
