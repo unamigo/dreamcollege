@@ -40,6 +40,8 @@ img{max-width:100%}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
 .tb-btn{font-size:13px;font-weight:600;color:var(--ink-soft);padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);cursor:pointer;white-space:nowrap;transition:.15s}
 .tb-btn:hover{border-color:var(--ink);color:var(--ink)}
+.tb-advisor{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tb-advisor:hover{color:var(--paper);opacity:.9}
 .tb-back{display:none;align-items:center;gap:7px}
 body.detail .tb-back{display:inline-flex}
 body.detail .tb-home-only{display:none}
@@ -271,6 +273,7 @@ table.cmp .swatch{width:10px;height:10px;border-radius:3px;flex-shrink:0}
     </div>
     <button class="tb-btn tb-back" onclick="go('')">← All schools</button>
     <div class="topbar-spacer"></div>
+    <a class="tb-btn tb-advisor" href="https://dreamcollege.xyz/advisor/" target="_blank" rel="noopener noreferrer">✎ Essay Advisor</a>
     <div class="fresh tb-home-only"><span class="dot"></span> News daily · data weekly · 26 Jun</div>
     <button class="tb-btn tb-home-only" onclick="document.getElementById('method').open=true;document.getElementById('method').scrollIntoView({behavior:'smooth'})">How to read this</button>
   </div>
