@@ -163,7 +163,8 @@ a{color:inherit}
     <div class="mark"><span>V</span></div>
     <h2>Essay Advisor</h2>
     <p id="gateMsg">A coach for your college essays. It asks hard questions and shows you what admitted students did. It will not write your essays for you.</p>
-    <input id="codeIn" type="password" placeholder="Access code" autocomplete="current-password">
+    <div style="position:relative"><input id="codeIn" type="password" name="advisor-key" placeholder="Access code" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" data-lpignore="true" data-1p-ignore data-form-type="other" style="padding-right:64px"><button type="button" id="showKey" style="position:absolute;right:8px;top:9px;border:none;background:none;font-size:12px;font-weight:600;color:var(--muted)">Show</button></div>
+    <div id="keyInfo" style="font-size:12px;color:var(--muted);min-height:16px;margin:-4px 0 8px"></div>
     <button class="btn dark full" id="codeBtn">Enter</button>
     <div class="gate-err" id="gateErr"></div>
   </div>
@@ -326,11 +327,14 @@ function save(){LS.set("convs",state.convs);LS.set("cur",state.cur)}
 function modelLabel(id){const m=MODELS.find(x=>x.id===id);return m?m.label:id}
 
 /* ---------- gate ---------- */
+function cleanKey(v){return String(v||"").replace(/^\s*bearer\s+/i,"").replace(/[\s\u200B-\u200D\uFEFF\u00A0"'`<>]/g,"")}
 async function checkCode(code){
   if(DIRECT){
-    const r=await fetch("https://openrouter.ai/api/v1/key",{headers:{authorization:"Bearer "+code}});
+    let r; try{r=await fetch("https://openrouter.ai/api/v1/key",{headers:{authorization:"Bearer "+code}})}catch(e){return {ok:true,soft:true}}
     if(r.ok)return {ok:true};
-    return {ok:false,msg:r.status===401?"That key isn't valid. Check it and paste it again.":"Could not reach OpenRouter ("+r.status+")."};
+    let why=""; try{const j=await r.json(); why=(j.error&&(j.error.message||j.error))||""}catch(e){}
+    if(r.status===401||r.status===403) return {ok:false,hard:true,msg:`OpenRouter did not accept this key (${r.status}${why?": "+why:""}). Check that it starts with sk-or- and was copied in full. If it was deleted or disabled on openrouter.ai, create a new one.`};
+    return {ok:true,soft:true};
   }
   const r=await fetch(API,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({code,check:true})});
   let j={};try{j=await r.json()}catch(e){}
@@ -342,12 +346,14 @@ async function initGate(){
   $("gate").classList.add("show");$("codeIn").focus();
 }
 $("codeBtn").onclick=async()=>{
-  const c=$("codeIn").value.trim(); if(!c)return;
+  const c=DIRECT?cleanKey($("codeIn").value):$("codeIn").value.trim(); if(!c)return; $("codeIn").value=c;
   $("codeBtn").textContent="Checking…";
   const r=await checkCode(c).catch(()=>({ok:false,msg:"Could not reach the advisor."}));
   $("codeBtn").textContent="Enter";
-  if(r.ok){state.code=c;LS.set("code",c);$("gate").classList.remove("show")} else $("gateErr").textContent=r.msg;
+  if(r.ok){state.code=c;LS.set("code",c);$("gate").classList.remove("show")} else {$("gateErr").innerHTML=esc(r.msg)+(DIRECT?' <br><button type="button" id="tryAnyway" style="margin-top:8px;background:none;border:none;text-decoration:underline;color:var(--ink-soft);font-size:13px">Use this key anyway</button>':"");const t=$("tryAnyway");if(t)t.onclick=()=>{state.code=c;$("gate").classList.remove("show")}}
 };
+$("showKey").onclick=()=>{const i=$("codeIn");i.type=i.type==="password"?"text":"password";$("showKey").textContent=i.type==="password"?"Show":"Hide"};
+$("codeIn").addEventListener("input",()=>{if(!DIRECT){$("keyInfo").textContent="";return} const v=cleanKey($("codeIn").value); $("keyInfo").textContent=v?(`${v.length} characters · starts with ${esc(v.slice(0,8))}… ends with …${esc(v.slice(-4))}`+(/^sk-or-/.test(v)?"":" · OpenRouter keys start with sk-or-")):"";});
 $("codeIn").onkeydown=e=>{if(e.key==="Enter")$("codeBtn").click()};
 
 /* ---------- sidebar ---------- */
@@ -494,7 +500,7 @@ async function stream(c,ai,history,mode,isSecond){
   try{
     const payload={code:state.code,model:ai.model,school:s.id==="general"?"":s.id,prompt:promptText,profile:state.profile,mode:(isSecond?"This is a second opinion on the same question; give your own independent take. ":"")+(mode||""),messages:history};
     const r=DIRECT?await DIRECT.send(payload,state.ctrl.signal):await fetch(API,{method:"POST",headers:{"content-type":"application/json"},signal:state.ctrl.signal,body:JSON.stringify(payload)});
-    if(!r.ok){let j={};try{j=await r.json()}catch(e){} if(j.error&&typeof j.error==="object")j.error=j.error.message; if(r.status===401){state.code="";LS.set("code","");$("gate").classList.add("show")} throw new Error(j.error||("Error "+r.status))}
+    if(!r.ok){let j={};try{j=await r.json()}catch(e){} if(j.error&&typeof j.error==="object")j.error=j.error.message; if(r.status===401){$("gateErr").textContent="OpenRouter rejected the key"+(j.error?": "+j.error:"")+". Paste it again.";$("gate").classList.add("show")} throw new Error(j.error||("Error "+r.status))}
     const reader=r.body.getReader(); const dec=new TextDecoder(); let buf=""; let last=0;
     while(true){
       const {done,value}=await reader.read(); if(done)break;
@@ -564,7 +570,7 @@ $("resumeBtn").onclick=()=>{
 /* ---------- boot ---------- */
 async function boot(){
   if(DIRECT){
-    MODELS=DIRECT.models; $("codeIn").placeholder="OpenRouter key (sk-or-…)"; $("codeIn").autocomplete="current-password";
+    MODELS=DIRECT.models; $("codeIn").placeholder="OpenRouter key (sk-or-…)"; $("codeIn").autocomplete="off";
     $("gateMsg").innerHTML="A coach for your college essays. It asks hard questions and shows you what admitted students did. It will not write your essays for you.<br><br><span style=\"font-size:13px;color:var(--muted)\">Paste the OpenRouter key your dad gave you. It stays in this tab only and is never saved or sent anywhere except OpenRouter.</span>";
     $("hint").textContent="Enter for a new line · Ctrl/⌘ + Enter to send · Conversations last until you close this tab. Use \"Save session\" to keep them.";
   } else try{const r=await fetch(API); if(r.ok){const j=await r.json(); if(j.models&&j.models.length)MODELS=j.models; if(!LS.get("model",null)&&j.defaultModel)state.model=j.defaultModel; if(j.configured===false){$("gateErr").textContent="The advisor isn't switched on yet (no API key or access code in Netlify)."}}}catch(e){}
