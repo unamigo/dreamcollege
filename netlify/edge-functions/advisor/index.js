@@ -3,7 +3,7 @@
 // Required Netlify environment variables:
 //   OPENROUTER_API_KEY  — an OpenRouter key (set a monthly credit limit on it)
 //   ADVISOR_CODE        — the access code Veer types once on the advisor page
-import { CORE, METHOD, KB, SCHOOL_NAMES } from "./kb.js";
+import { CORE, METHOD, KB, SCHOOL_NAMES, DIGEST } from "./kb.js";
 
 // Only these models can be called through this endpoint.
 const MODELS = [
@@ -36,8 +36,7 @@ export function buildSystem({ school, prompt, profile, mode, today }) {
   if (school && KB[school]) {
     parts.push(`\n# Research briefing: ${SCHOOL_NAMES[school]}\nThis is the school Veer selected for this conversation. Ground your advice in it.\n\n${KB[school]}`);
   } else {
-    const list = Object.keys(SCHOOL_NAMES).map((k) => SCHOOL_NAMES[k]).join(", ");
-    parts.push(`\n# Scope\nVeer is working on general material (for example the Common App personal statement or activities list), not one school. His schools: ${list}. If he asks about a specific school, suggest he switch the school selector so you can load that school's research.`);
+    parts.push(`\n# Scope\nVeer is working on general material (for example the Common App personal statement or activities list), not one school. Below is a digest of all 12 schools: deadlines, essay prompts and key strategy notes. For deep school-specific coaching (what admitted students wrote, what readers want), suggest he switch the school selector so the full research for that school loads.\n\n${DIGEST}`);
   }
   if (prompt) parts.push(`\n# The prompt he is working on\n${prompt}`);
   if (mode) parts.push(`\n# What he wants right now\n${mode}`);
@@ -86,10 +85,7 @@ export default async (req) => {
     today,
   });
 
-  // Anthropic models support prompt caching; the long system prompt is reused every turn.
-  const systemMsg = model.startsWith("anthropic/")
-    ? { role: "system", content: [{ type: "text", text: system, cache_control: { type: "ephemeral" } }] }
-    : { role: "system", content: system };
+  const systemMsg = { role: "system", content: system };
 
   const upstream = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
